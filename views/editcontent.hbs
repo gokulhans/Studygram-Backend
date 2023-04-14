@@ -1,0 +1,406 @@
+<script>
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        if (username === 'admin' && password === 'password') {
+            // Successful login
+            alert('Login successful!');
+        } else {
+            // Failed login
+            alert('Incorrect username or password.');
+        }
+    });
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css" integrity="sha512-U9SPG5m5v5Hk7m6lf/sU6QrUq3Pw/wFJHkyiYz9XCEU6zwKjdeT7VdrTAdKxwx7L0TgTzG7ZKjtrZgQ4Khq3sQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+  #login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #4B5563;
+    color: #fff;
+    cursor: pointer;
+  }
+</style>
+
+<form id="login-form">
+    <input type="text" id="username" name="username" placeholder="Username">
+    <input type="password" id="password" name="password" placeholder="Password">
+    <button type="submit">Login</button>
+</form>
+
+<div class="" style="display: ;"> 
+
+    <div class="">
+        <form action="" method="post"></form>
+        <div
+            class=" p-4 w-full max-w-xl lg:my-16 bg-white rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <form class="space-y-6" method="post" action="/content/edit/">
+                <center>
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Edit Site Content</h5>
+                </center>
+                <h1 class="font-bold text-red-500">Navbar</h1>
+
+                <div>
+                    <label for="pname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Welcome title top</label>
+                    <input type="text" name="wtt" id="name" value="{{data.wtt}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="Name..." required="">
+                </div>
+                <div>
+                    <label for="sdes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Welcome Phone Number</label>
+                    <input type="text" name="wpn" id="sdes" value="{{data.wpn}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="it's a sample product" required="">
+                </div>
+                <div>
+                    <label for="ldes" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Navbar Title</label>
+                    <textarea type="text" name="nt" id="ldes"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="............" required="">{{data.nt}}</textarea>
+                </div>
+                <h1 class="font-bold text-red-500">Home</h1>
+
+                <div>
+                    <label for="tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Main Heading</label>
+                    <input type="text" name="mh" id="tags" value="{{data.mh}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="tags.." required="">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Main Sub Heading</label>
+                    <input type="text" name="msh" value="{{data.msh}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Main Description</label>
+                    <input type="text" name="md" value="{{data.md}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Second Screen</h1>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Second Tab Heading</label>
+                    <input type="text" name="msh" value="{{data.sth}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Second Tab Description</label>
+                    <input type="text" name="md" value="{{data.std}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Founder 1</h1>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder One Image</label>
+                    <input type="text" name="foi" value="{{data.foi}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder One Name</label>
+                    <input type="text" name="fon" value="{{data.fon}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder One Subtitle</label>
+                    <input type="text" name="fos" value="{{data.fos}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder One Description</label>
+                    <input type="text" name="ftd" value="{{data.ftd}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Founder 2</h1>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder Two Image</label>
+                    <input type="text" name="fti" value="{{data.fti}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder Two Name</label>
+                    <input type="text" name="ftn" value="{{data.ftn}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder Two Subtitle</label>
+                    <input type="text" name="fts" value="{{data.fts}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Founder Two Description</label>
+                    <input type="text" name="ftd" value="{{data.ftd}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Activities</h1>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Activity one Image</label>
+                    <input type="text" name="aoi" value="{{data.aoi}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Activity one Title</label>
+                    <input type="text" name="aot" value="{{data.aot}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Activity Two Image</label>
+                    <input type="text" name="ati" value="{{data.ati}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Activity Two Title</label>
+                    <input type="text" name="att" value="{{data.att}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Activity Three Image</label>
+                    <input type="text" name="athi" value="{{data.athi}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Activity Three Title</label>
+                    <input type="text" name="atht" value="{{data.atht}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Requirements</h1>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 1</label>
+                    <input type="text" name="r1" value="{{data.r1}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 2</label>
+                    <input type="text" name="r2" value="{{data.r2}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 3</label>
+                    <input type="text" name="r3" value="{{data.r3}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 4</label>
+                    <input type="text" name="r4" value="{{data.r4}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 5</label>
+                    <input type="text" name="r5" value="{{data.r5}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 6</label>
+                    <input type="text" name="r6" value="{{data.r6}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 7</label>
+                    <input type="text" name="r7" value="{{data.r7}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 8</label>
+                    <input type="text" name="r8" value="{{data.r8}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Requirements 8</label>
+                    <input type="text" name="r8" value="{{data.r8}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+
+                <h1 class="font-bold text-red-500">Donation</h1>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Donation Link</label>
+                    <input type="text" name="dl" value="{{data.dl}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Map</h1>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Map Link</label>
+                    <input type="text" name="ml" value="{{data.ml}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Contact Info</h1>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Contact Name</label>
+                    <input type="text" name="cn" value="{{data.cn}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Contact Phone Number</label>
+                    <input type="text" name="cpn" value="{{data.cpn}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Address Info</h1>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Address Title</label>
+                    <input type="text" name="ait" value="{{data.ait}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Detailed Address</label>
+                    <input type="text" name="dai" value="{{data.dai}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <h1 class="font-bold text-red-500">Opening Hours</h1>
+
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Monday - Friday</label>
+                    <input type="text" name="mfs" value="{{data.mfs}}"
+                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    <input type="text" name="mfe" value="{{data.mfe}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Saturday</label>
+                    <input type="text" name="sats" value="{{data.sats}}"
+                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    <input type="text" name="sate" value="{{data.sate}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Sunday</label>
+                    <input type="text" name="suns" value="{{data.suns}}"
+                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    <input type="text" name="sune" value="{{data.sune}}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                </div>
+
+                <input type="text" name="id" id="id" hidden value="{{data._id}}" />
+
+                <button
+                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Edit Product </button>
+        </div>
+    </div>
+    </form>
+</div>
+
+</div>
+
+<script>
+    function preview(e) {
+        console.log(e)
+        document.getElementById('imgview').src = URL.createObjectURL(e.target.files[0])
+    }
+    let image;
+
+    let name = document.getElementById('name').value;
+    let sdes = document.getElementById('sdes').value;
+    let ldes = document.getElementById('ldes').value;
+    let tags = document.getElementById('tags').value;
+    let price = document.getElementById('price').value;
+    let id = document.getElementById('id').value;
+
+
+    $("button1").click(async function () {
+        let image = await updateImageDisplay();
+
+
+
+        $.post("/products/edit/",
+            {
+                sdes: sdes, ldes: ldes, price: price, name: name, tags: tags, image: image, id: id
+            },
+            function () {
+                alert('added');
+                window.location = "http://localhost:3000/products/";
+            });
+
+    });
+
+
+    const input = document.getElementById('image');
+
+
+    async function updateImageDisplay() {
+
+        const curFiles = input.files;
+        for (const file of curFiles) {
+
+            const data = new FormData()
+            data.append("file", file)
+            data.append("upload_preset", "e-commerce")
+            data.append("cloud_name", "gbrozdev")
+            await fetch("https://api.cloudinary.com/v1_1/gbrozdev/image/upload", {
+                method: "post",
+                body: data
+            })
+                .then(res => res.json())
+                .then(data => {
+
+
+
+                    let url = 'https://res.cloudinary.com/gbrozdev/image/upload/v1662275322/' + data.public_id + '.png'
+                    image = url;
+
+                    alert('image added');
+
+
+                })
+        }
+        return image;
+    }
+
+</script>
