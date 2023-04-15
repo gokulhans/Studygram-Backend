@@ -11,6 +11,9 @@ const sessions = require('express-session');
 var db = require('./connection');
 const hbs = require('express-handlebars');
 var app = express();
+var cors = require('cors')
+
+app.use(cors());
 
 db.connect((err) => {
     if (err) console.log("Connection Error" + err);
