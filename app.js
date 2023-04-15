@@ -14,6 +14,7 @@ var app = express();
 var cors = require('cors')
 
 app.use(cors());
+app.options('*', cors());
 
 db.connect((err) => {
     if (err) console.log("Connection Error" + err);
