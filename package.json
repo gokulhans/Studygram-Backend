@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "*",
+    "cors": "^2.8.5",
     "debug": "*",
     "dotenv": "*",
     "express": "*",
