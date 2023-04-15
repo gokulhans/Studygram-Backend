@@ -1,51 +1,5 @@
-<script>
-    document.getElementById('login-form').addEventListener('submit', function (event) {
-        event.preventDefault();
 
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-
-        if (username === 'admin' && password === 'password') {
-            // Successful login
-            alert('Login successful!');
-        } else {
-            // Failed login
-            alert('Incorrect username or password.');
-        }
-    });
-</script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css" integrity="sha512-U9SPG5m5v5Hk7m6lf/sU6QrUq3Pw/wFJHkyiYz9XCEU6zwKjdeT7VdrTAdKxwx7L0TgTzG7ZKjtrZgQ4Khq3sQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<style>
-  #login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  input[type="text"],
-  input[type="password"],
-  button {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    background-color: #4B5563;
-    color: #fff;
-    cursor: pointer;
-  }
-</style>
-
-<form id="login-form">
-    <input type="text" id="username" name="username" placeholder="Username">
-    <input type="password" id="password" name="password" placeholder="Password">
-    <button type="submit">Login</button>
-</form>
-
-<div class="" style="display: ;"> 
+<div class=""> 
 
     <div class="">
         <form action="" method="post"></form>
