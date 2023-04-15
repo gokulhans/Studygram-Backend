@@ -15,10 +15,10 @@ const viewContent = async function (req, res) {
 const viewContentjson = async function (req, res) {
     let data = await db.get().collection('content').find().toArray()
     console.log(data);
-    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500/'); // replace with your client-side domain
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+//     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500/'); // replace with your client-side domain
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     res.setHeader('Access-Control-Allow-Credentials', true);
     res.json({ data: data[0] });
 }
 
