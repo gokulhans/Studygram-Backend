@@ -11,10 +11,13 @@ const sessions = require('express-session');
 var db = require('./connection');
 const hbs = require('express-handlebars');
 var app = express();
-var cors = require('cors')
+var cors = require('cors');
+var bodyParser = require('body-parser');
 
 app.use(cors());
 app.options('*', cors());
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+
 
 db.connect((err) => {
     if (err) console.log("Connection Error" + err);
