@@ -24,17 +24,17 @@ const viewContentjson = async function (req, res) {
 
 const editContentForm = async function (req, res) {
     let data = await db.get().collection('content').findOne({ _id: ObjectId("643828592fe7f8fbf282901a") })
-    console.log(data);
+    // console.log(data);
     res.render('editcontent', { data });
 }
 
 const editContent = async function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     let newdata = req.body
     let query = { _id: ObjectId("643828592fe7f8fbf282901a") }
     var newvalues = { $set: newdata };
     await db.get().collection('content').updateOne(query, newvalues)
-    res.redirect(`/content/`)
+    res.redirect('back')
 }
 
 exports.viewContentjson = viewContentjson;
