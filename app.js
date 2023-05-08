@@ -26,14 +26,8 @@ db.connect((err) => {
 
 
 var indexRouter = require('./routes/index');
-
 var authRouter = require('./routes/auth-routes');
-var historyRouter = require('./routes/history-routes');
-var orderRouter = require('./routes/order-routes');
-var paymentRouter = require('./routes/payment-routes');
-var productRouter = require('./routes/product-routes');
-var checkoutRouter = require('./routes/checkout-routes');
-var contentRouter = require('./routes/content-routes');
+
 
 
 // view engine setup
@@ -59,15 +53,9 @@ app.use(sessions({
     resave: false
 }));
 
-app.use('/', contentRouter);
-
+app.use('/', indexRouter);
 app.use('/auths', authRouter);
-app.use('/history', historyRouter);
-app.use('/orders', orderRouter);
-app.use('/payments', paymentRouter);
-app.use('/products', productRouter);
-app.use('/checkouts', checkoutRouter);
-app.use('/content', contentRouter);
+
 
 
 // catch 404 and forward to error handler

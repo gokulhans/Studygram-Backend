@@ -24,6 +24,7 @@
     "mongodb": "*",
     "morgan": "*",
     "nodemon": "*",
-    "razorpay": "^2.8.3"
+    "razorpay": "^2.8.3",
+    "sweetalert2": "^11.7.5"
   }
 }

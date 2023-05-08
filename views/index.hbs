@@ -1,130 +1,489 @@
-<main class="h-full overflow-y-auto">
-  <div class="container px-6 mx-auto grid">
-    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-      Dashboard
-    </h2>
-    <!-- CTA -->
-    {{!-- <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-      href="https://github.com/estevanmaito/windmill-dashboard">
-      <div class="flex items-center">
-        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path
-            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-          </path>
-        </svg>
-        <span>Star this project on GitHub</span>
-      </div>
-      <span>View more &RightArrow;</span>
-    </a> --}}
-    <!-- Cards -->
-    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-      <!-- Card -->
-      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-            </path>
-          </svg>
-        </div>
-        <div>
-          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Total clients
-          </p>
-          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            6389
-          </p>
-        </div>
-      </div>
-      <!-- Card -->
-      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd"
-              d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </div>
-        <div>
-          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Account balance
-          </p>
-          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            $ 46,760.89
-          </p>
-        </div>
-      </div>
-      <!-- Card -->
-      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
-            </path>
-          </svg>
-        </div>
-        <div>
-          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            New sales
-          </p>
-          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            376
-          </p>
-        </div>
-      </div>
-      <!-- Card -->
-      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd"
-              d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </div>
-        <div>
-          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Pending contacts
-          </p>
-          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            35
-          </p>
-        </div>
-      </div>
-    </div>
+<!-- Sidebar -->
+<aside class="bg-gray-800 text-white w-64 h-screen fixed">
+  <!-- Sidebar Content -->
+  <nav class="p-4">
+    <ul class="space-y-4">
+      <li><a href="#" class="block sidebar-link" data-form="university">University</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="course">Course</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="semester">Semester</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="subject">Subject</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="category">Catagory</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="module">Module</a></li>
+      <li><a href="/addvideo" class="block">Video</a></li>
+      <li><a href="/adddoc" class="block">Doc</a></li>
+    </ul>
+  </nav>
+</aside>
 
-     <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <div>
-          <p class="mb-2 text-xl text-gray-600 dark:text-gray-400">
-           <b>Clinic:-</b> {{user.user.name}}
-           <br> 
-           <b>Doctor:-</b> {{user.user.cname}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Location : -</b> {{user.user.location}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Gmail:-</b> {{user.user.gmail}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Phone :- </b>{{user.user.phone}}
-          </p>
-          <p class="text-lg text-gray-700 dark:text-gray-200">
-           <b>Open :-</b> {{user.user.start}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Close:-</b> {{user.user.end}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Fee:-</b> {{user.user.fee}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Duration:-</b> {{user.user.duration}}
-          </p>
-          <p class="text-lg  text-gray-700 dark:text-gray-200">
-           <b>Working:-</b> {{user.user.working}}
-          </p>
-        </div>
+<!-- Main Content -->
+<main class="ml-64 p-8">
+  {{!-- <h1 class="text-2xl font-bold mb-4">Dashboard</h1> --}}
+
+  <!-- University Form -->
+  <div id="university-form" class="tab hidden">
+    <form action="/university" method="post">
+
+      <h2 class="text-xl font-semibold mb-2">Add University</h2>
+      <div class="mb-4">
+        <label for="university-name" class="block">University Name:</label>
+        <input name="uniname" type="text" id="university-name" class="border border-gray-400 px-4 py-2 rounded w-64">
       </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            University Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each university}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.uniname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/university/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Course Form -->
+  <div id="course-form" class="tab hidden">
+
+    <form action="/course" method="post">
+      <h2 class="text-xl font-semibold mb-2">Add Course</h2>
+      <div class="mb-4">
+        <label for="course-name" class="block">Course Name:</label>
+        <input name="coursename" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Course Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each course}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/course/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+
 
   </div>
+
+
+
+  <!-- Semester Form -->
+  <div id="semester-form" class="tab hidden">
+    <form action="/semester" method="post">
+
+      <h2 class="text-xl font-semibold mb-2">Add Semester</h2>
+      <div class="mb-4">
+        <label for="semester-name" class="block">Semester Name:</label>
+        <input name="semestername" type="text" id="semester-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Semester Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each semester}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.semestername}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/semester/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <!-- Subject Form -->
+  <div id="subject-form" class="tab hidden">
+    <form action="/subject" method="post">
+
+      <h2 class="text-xl font-semibold mb-2">Add Subject</h2>
+      <div class="mb-4">
+        <label for="university-select" class="block">University:</label>
+        <select name="universityname" id="university-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each university}}
+          <option value="{{this.funiname}}">{{this.uniname}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="course-select" class="block">Course:</label>
+        <select name="coursename" id="course-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each course}}
+          <option value="{{this.fcoursename}}">{{this.coursename}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="semester-select" class="block">Semester:</label>
+        <select name="semestername" id="semester-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each semester}}
+          <option value="{{this.fsemestername}}">{{this.semestername}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="subject-name" class="block">Subject Name:</label>
+        <input name="subjectname" type="text" id="subject-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Subject</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            University</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Course</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Semester</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each subject}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.subjectname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.universityname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.semestername}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/subject/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+  <!-- Category Form -->
+  <div id="category-form" class="tab hidden">
+    <form action="/category" method="post">
+
+      <h2 class="text-xl font-semibold mb-2">Add Category</h2>
+      <div class="mb-4">
+        <label for="category-name" class="block">Category Name:</label>
+        <input name="categoryname" type="text" id="category-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Category Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each category}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.categoryname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/category/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+  </div>
+
+  {{!-- Module Form --}}
+  <div id="module-form" class="tab hidden">
+    <h2 class="text-xl font-semibold mb-2">Add Module</h2>
+
+    <form action="/module" method="post">
+      <div class="mb-4">
+        <label for="university-select" class="block">University:</label>
+        <select name="universityname" id="university-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each university}}
+          <option value="{{this.funiname}}">{{this.uniname}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="course-select" class="block">Course:</label>
+        <select name="coursename" id="course-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each course}}
+          <option value="{{this.fcoursename}}">{{this.coursename}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="semester-select" class="block">Semester:</label>
+        <select name="semestername" id="semester-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each semester}}
+          <option value="{{this.fsemestername}}">{{this.semestername}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="subject-select" class="block">Subject:</label>
+        <select name="subjectname" id="subject-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each subject}}
+          <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="module" class="block">Module Name</label>
+        <input type="text" id="module" name="modulename" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+    </form>
+
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Module</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            University</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Course</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Semester</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Subject</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each module}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.modulename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.universityname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.semestername}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.subjectname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/subject/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+  </div>
+
+  {{!-- Video Form --}}
+  <div id="video-form" class="tab hidden">
+    <form action="/video" method="post" class="grid grid-cols-3 gap-4">
+      <h2 class="text-xl font-semibold mb-2 col-span-3">Add Video</h2>
+
+      <div class="mb-4 col-span-1">
+        <label for="university-select" class="block">University:</label>
+        <select name="universityname" id="university-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each university}}
+          <option value="{{this.funiname}}">{{this.uniname}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4 col-span-1">
+        <label for="course-select" class="block">Course:</label>
+        <select name="coursename" id="course-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each course}}
+          <option value="{{this.fcoursename}}">{{this.coursename}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4 col-span-1">
+        <label for="semester-select" class="block">Semester:</label>
+        <select name="semestername" id="semester-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each semester}}
+          <option value="{{this.fsemestername}}">{{this.semestername}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="mb-4 col-span-1">
+        <label for="subject-select" class="block">Subject:</label>
+        <select name="subjectname" id="subject-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each subject}}
+          <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="mb-4 col-span-1">
+        <label for="module-select" class="block">Module:</label>
+        <select name="modulename" id="module-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each module}}
+          <option value="{{this.fmodulename}}">{{this.modulename}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="mb-4 col-span-2">
+        <label for="video-name" class="block">Video Name:</label>
+        <input type="text" name="videoname" id="video-name" class="border border-gray-400 px-4 py-2 rounded w-full">
+      </div>
+
+      <div class="mb-4 col-span-1">
+        <label for="video-link" class="block">Video Link:</label>
+        <input type="text" name="videolink" id="video-link" class="border border-gray-400 px-4 py-2 rounded w-full">
+      </div>
+
+      <div class="col-span-3">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+      </div>
+    </form>
+
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Video</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            University</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Course</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Semester</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Subject</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Module</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each video}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap"><a href="{{this.videolink}}" target="_blank"
+              class="text-blue-500 underline">{{this.videoname}}</a></td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.universityname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.semestername}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.subjectname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.modulename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/subject/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
 </main>
+
+<script>
+  // Get the sidebar links
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  // Get the forms
+  const forms = document.querySelectorAll('.tab');
+
+  // Add click event listener to each sidebar link
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const formId = link.dataset.form;
+
+      // Hide all forms
+      forms.forEach(form => {
+        form.classList.add('hidden');
+      });
+
+      // Show the selected form
+      const selectedForm = document.getElementById(`${formId}-form`);
+      selectedForm.classList.remove('hidden');
+      // Update the active state of the sidebar link
+      sidebarLinks.forEach(link => {
+        link.classList.remove('text-blue-500');
+      });
+      link.classList.add('text-blue-500');
+    });
+  });
+
+  window.onload = function () {
+    var fragment = window.location.hash.substring(1);
+    console.log(fragment);
+    if (fragment) {
+      document.getElementById(fragment).classList.remove('hidden');
+    } else {
+      document.getElementById('university-form').classList.remove('hidden');
+    }
+
+  };
+
+</script>
