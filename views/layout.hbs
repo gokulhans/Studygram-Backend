@@ -27,7 +27,7 @@
     integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    
+
 
 </head>
 
@@ -58,7 +58,7 @@
       justify-content: center;
     }
   </style>
-
+  {{!--
   <style>
     .loading-spinner {
       position: fixed;
@@ -91,20 +91,18 @@
 
   <div class="loading-spinner h-screen w-screen bg-white">
     <div class="spinner"></div>
-  </div>
+  </div> --}}
+  {{!--
+  window.addEventListener('beforeunload', function () {
+  // show the loading spinner
+  document.querySelector('.loading-spinner').style.display = 'block';
+  });
 
-  <script>
-    window.addEventListener('beforeunload', function () {
-      // show the loading spinner
-      document.querySelector('.loading-spinner').style.display = 'block';
-    });
+  webView.onPageFinished.listen((url) => {
+  // hide the loading spinner
+  document.querySelector('.loading-spinner').style.display = 'none';
+  }); --}}
 
-    webView.onPageFinished.listen((url) => {
-      // hide the loading spinner
-      document.querySelector('.loading-spinner').style.display = 'none';
-    });
-
-  </script>
 
   <div class="">
     {{!-- {{>navbar}} --}}

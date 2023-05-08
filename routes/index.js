@@ -13,7 +13,8 @@ router.get('/', async function (req, res, next) {
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
-    console.log(university);
+
+    // console.log(university);
     res.render('index.hbs', { university, course, semester, category, subject, module, video, doc })
     // let user = null;
     // if (req.session) {
@@ -53,9 +54,11 @@ router.post('/university', async function (req, res) {
     const universityName = req.body.uniname;
     const formattedUniversityName = universityName.toLowerCase().replace(/\s/g, '-');
     req.body.funiname = formattedUniversityName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('university').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     })
     res.redirect('/')
 });
@@ -71,9 +74,11 @@ router.post('/course', async function (req, res) {
     const courseName = req.body.coursename;
     const formattedCourseName = courseName.toLowerCase().replace(/\s/g, '-');
     req.body.fcoursename = formattedCourseName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('course').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/');
 });
@@ -89,9 +94,11 @@ router.post('/semester', async function (req, res) {
     const semesterName = req.body.semestername;
     const formattedSemesterName = semesterName.toLowerCase().replace(/\s/g, '-');
     req.body.fsemestername = formattedSemesterName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('semester').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/');
 });
@@ -107,9 +114,11 @@ router.post('/subject', async function (req, res) {
     const subjectName = req.body.subjectname;
     const formattedSubjectName = subjectName.toLowerCase().replace(/\s/g, '-');
     req.body.fsubjectname = formattedSubjectName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('subject').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/');
 });
@@ -126,9 +135,11 @@ router.post('/module', async function (req, res) {
     const moduleName = req.body.modulename;
     const formattedModuleName = moduleName.toLowerCase().replace(/\s/g, '-');
     req.body.fmodulename = formattedModuleName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('module').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/');
 });
@@ -145,9 +156,11 @@ router.post('/category', async function (req, res) {
     const categoryName = req.body.categoryname;
     const formattedCategoryName = categoryName.toLowerCase().replace(/\s/g, '-');
     req.body.fcategoryname = formattedCategoryName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('category').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/');
 });
@@ -164,9 +177,11 @@ router.post('/video', async function (req, res) {
     const videoName = req.body.videoname;
     const formattedVideoName = videoName.toLowerCase().replace(/\s/g, '-');
     req.body.fvideoname = formattedVideoName;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('video').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/addvideo');
 });
@@ -183,9 +198,11 @@ router.post('/doc', async function (req, res) {
     const docTitle = req.body.docname;
     const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
     req.body.fdocname = formattedDocTitle;
-    console.log(data);
+
+    // console.log(data);
     await db.get().collection('doc').insertOne(data).then((response) => {
-        console.log(response);
+
+        // console.log(response);
     });
     res.redirect('/adddoc');
 });
@@ -202,7 +219,8 @@ router.get('/subjectlist', async (req, res) => {
         const selectedCourse = req.query.course;
         const selectedSemester = req.query.semester;
 
-        console.log(selectedUniversity, selectedCourse, selectedSemester);
+
+        // console.log(selectedUniversity, selectedCourse, selectedSemester);
 
         // Query the database to retrieve the modules based on the selected university and semester
         const subjects = await db.get().collection('subject').find({
@@ -210,10 +228,12 @@ router.get('/subjectlist', async (req, res) => {
             coursename: selectedCourse,
             semestername: selectedSemester,
         }).toArray();
-        console.log(subjects);
+
+        // console.log(subjects);
         res.json(subjects);
     } catch (error) {
-        console.error(error);
+
+        // console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -225,7 +245,8 @@ router.get('/modulelist', async (req, res) => {
         const selectedSemester = req.query.semester;
         const selectedSubject = req.query.subject;
 
-        console.log(selectedUniversity, selectedCourse, selectedSemester, selectedSubject);
+
+        // console.log(selectedUniversity, selectedCourse, selectedSemester, selectedSubject);
 
 
         const modules = await db.get().collection('module').find({
@@ -234,11 +255,14 @@ router.get('/modulelist', async (req, res) => {
             semestername: selectedSemester,
             subjectname: selectedSubject,
         }).toArray();
-        console.log("modules");
-        console.log(modules);
+
+        // console.log("modules");
+
+        // console.log(modules);
         res.json(modules);
     } catch (error) {
-        console.error(error);
+
+        // console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -246,17 +270,20 @@ router.get('/modulelist', async (req, res) => {
 
 // const getAllProducts = async function(req, res) {
 //     let data = await db.get().collection('products').find().toArray()
-//     console.log(data);
+//     
+// console.log(data);
 //     res.render('pages/allproducts', { data, user: req.session.user });
 // }
 // const addProduct = async function(req, res) {
 //     let data = req.body
-//     console.log(data);
+//     
+// console.log(data);
 //     await db.get().collection('products').insertOne(data)
 //     res.render('pages/product', { data })
 // }
 // const editProduct = async function(req, res) {
-//     console.log(req.body);
+//     
+// console.log(req.body);
 //     let newdata = req.body
 //     let query = { _id: ObjectId(req.body.id) }
 //     var newvalues = { $set: newdata };
@@ -269,25 +296,33 @@ router.get('/modulelist', async (req, res) => {
 //     res.redirect('/auths/admin/dashboard')
 // }
 
-router.get('/clean', async function (req, res) {
-    // await db.get().collection('orders').remove()
-    db.get().collection('module').drop()
-        .then(() => console.log('Module collection deleted.'))
-        .catch((error) => console.error('Error deleting Module collection:', error));
+// router.get('/clean', async function (req, res) {
+//     // await db.get().collection('orders').remove()
+//     db.get().collection('module').drop()
+//         .then(() =>
+//         // console.log('Module collection deleted.'))
+//         .catch((error) =>
+//             // console.error('Error deleting Module collection:', error));
 
-    db.get().collection('subject').drop()
-        .then(() => console.log('Subject collection deleted.'))
-        .catch((error) => console.error('Error deleting Subject collection:', error));
+//             db.get().collection('subject').drop()
+//                 .then(() =>
+//         // console.log('Subject collection deleted.'))
+//         .catch((error) =>
+//                     // console.error('Error deleting Subject collection:', error));
 
-    db.get().collection('doc').drop()
-        .then(() => console.log('Doc collection deleted.'))
-        .catch((error) => console.error('Error deleting Doc collection:', error));
+//                     db.get().collection('doc').drop()
+//                         .then(() =>
+//         // console.log('Doc collection deleted.'))
+//         .catch((error) =>
+//                             // console.error('Error deleting Doc collection:', error));
 
-    db.get().collection('video').drop()
-        .then(() => console.log('Video collection deleted.'))
-        .catch((error) => console.error('Error deleting Video collection:', error));
-    res.redirect('back');
-});
+//                             db.get().collection('video').drop()
+//                                 .then(() =>
+//         // console.log('Video collection deleted.'))
+//         .catch((error) =>
+//                                     // console.error('Error deleting Video collection:', error));
+//                                     res.redirect('back');
+// });
 
 
 module.exports = router;
