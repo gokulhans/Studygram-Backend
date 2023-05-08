@@ -373,4 +373,10 @@ router.get('/modulelist', async (req, res) => {
 // });
 
 
+router.get('/university', async (req, res) => {
+    let university = await db.get().collection('university').find().toArray();
+    res.json(university);
+});
+
+
 module.exports = router;
