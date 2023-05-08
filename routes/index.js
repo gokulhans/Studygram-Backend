@@ -26,6 +26,7 @@ router.get('/', async function (req, res, next) {
     //     res.redirect('auths/admin/');
     // }
 });
+
 router.get('/addvideo', async function (req, res, next) {
     let university = await db.get().collection('university').find().toArray();
     let course = await db.get().collection('course').find().toArray();
@@ -37,6 +38,34 @@ router.get('/addvideo', async function (req, res, next) {
     let doc = await db.get().collection('doc').find().toArray();
     res.render('addvideo.hbs', { university, course, semester, category, subject, module, video, doc })
 });
+
+router.get('/contribute', async function (req, res, next) {
+    let university = await db.get().collection('university').find().toArray();
+    let course = await db.get().collection('course').find().toArray();
+    let semester = await db.get().collection('semester').find().toArray();
+    let subject = await db.get().collection('subject').find().toArray();
+    let module = await db.get().collection('module').find().toArray();
+    let category = await db.get().collection('category').find().toArray();
+    let video = await db.get().collection('video').find().toArray();
+    let doc = await db.get().collection('doc').find().toArray();
+    res.render('contribute.hbs', { university, course, semester, category, subject, module, video, doc })
+});
+
+router.post('/contribute/:id', async function (req, res) {
+    let userid = req.params.id;
+    let data = req.body;
+    const docTitle = req.body.docname;
+    const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
+    req.body.fdocname = formattedDocTitle;
+    req.body.userid = userid;
+    req.body.verify = false;
+    console.log(data);
+    await db.get().collection('doc').insertOne(data).then((response) => {
+        console.log(response);
+    });
+    res.redirect('/contribute');
+});
+
 router.get('/adddoc', async function (req, res, next) {
     let university = await db.get().collection('university').find().toArray();
     let course = await db.get().collection('course').find().toArray();
@@ -49,15 +78,36 @@ router.get('/adddoc', async function (req, res, next) {
     res.render('adddoc.hbs', { university, course, semester, category, subject, module, video, doc })
 });
 
+router.get('/verify', async function (req, res, next) {
+    // let doc = await db.get().collection('doc').find().toArray();
+    let doc = await db.get().collection('doc').find({ verify: false }).toArray();
+    res.render('verify.hbs', { doc })
+});
+
+router.get('/doc/verify/:id', async function (req, res, next) {
+    let id = req.params.id
+    let doc = await db.get().collection('doc');
+    doc.updateOne(
+        { _id: ObjectId(id) }, // Filter to find the document to update
+        { $set: { verify: true } }, // Update operation to set the verify field to true
+        function (err, result) {
+            if (err) {
+                console.error('Error updating document:', err);
+            } else {
+                console.log('Document updated successfully', result);
+            }
+        }
+    );
+    res.redirect('/verify')
+});
+
 router.post('/university', async function (req, res) {
     let data = req.body
     const universityName = req.body.uniname;
     const formattedUniversityName = universityName.toLowerCase().replace(/\s/g, '-');
     req.body.funiname = formattedUniversityName;
-
     // console.log(data);
     await db.get().collection('university').insertOne(data).then((response) => {
-
         // console.log(response);
     })
     res.redirect('/')
@@ -198,10 +248,8 @@ router.post('/doc', async function (req, res) {
     const docTitle = req.body.docname;
     const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
     req.body.fdocname = formattedDocTitle;
-
     // console.log(data);
     await db.get().collection('doc').insertOne(data).then((response) => {
-
         // console.log(response);
     });
     res.redirect('/adddoc');
