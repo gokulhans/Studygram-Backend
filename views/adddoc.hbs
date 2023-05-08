@@ -11,6 +11,10 @@
         const response = await fetch(`/subjectlist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}`);
         const subjects = await response.json();
         subjectSelect.innerHTML = '';
+        const nullOption = document.createElement('option');
+        nullOption.value = 'null';
+        nullOption.textContent = 'Select Subject';
+        subjectSelect.appendChild(nullOption);
         subjects.forEach((subject) => {
             const option = document.createElement('option');
             option.value = subject.fsubjectname;
@@ -30,13 +34,21 @@
         let selectedCourse = courseSelect.value;
         let selectedSemester = semesterSelect.value;
         let selectedSubject = subjectSelect.value;
-        const response = await fetch(`/subjectlist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}$subject=${selectedSubject}`);
+        const response = await fetch(`/modulelist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}&subject=${selectedSubject}`);
         const modules = await response.json();
         moduleSelect.innerHTML = '';
+        const nullOption = document.createElement('option');
+        nullOption.value = 'null';
+        nullOption.textContent = 'Select Module';
+        moduleSelect.appendChild(nullOption);
+        const allOption = document.createElement('option');
+        allOption.value = 'all-module';
+        allOption.textContent = 'All Module';
+        moduleSelect.appendChild(allOption);
         modules.forEach((module) => {
             const option = document.createElement('option');
-            option.value = subject.fmodulename;
-            option.textContent = subject.modulename;
+            option.value = module.fmodulename;
+            option.textContent = module.modulename;
             moduleSelect.appendChild(option);
         });
     }
@@ -46,71 +58,76 @@
     <form action="/doc" method="post" class="grid grid-cols-3 gap-4">
         <h2 class="text-xl font-semibold mb-2 col-span-3">Add Document</h2>
 
-        <div class="mb-4 col-span-1">
+        <div class="mb-4 block md:col-span-1">
             <label for="university-select" class="block">University:</label>
             <select name="universityname" id="university-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
+                {{!-- <option value="null">Select University</option> --}}
+
                 {{#each university}}
                 <option value="{{this.funiname}}">{{this.uniname}}</option>
                 {{/each}}
             </select>
         </div>
-        <div class="mb-4 col-span-1">
+        <div class="mb-4 block md:col-span-1">
             <label for="course-select" class="block">Course:</label>
             <select name="coursename" id="course-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
+                <option value="null">Select Course</option>
+
                 {{#each course}}
                 <option value="{{this.fcoursename}}">{{this.coursename}}</option>
                 {{/each}}
             </select>
         </div>
-
-        <div class="mb-4 col-span-1">
+        <div class="mb-4 block md:col-span-1">
             <label for="semester-select" class="block">Semester:</label>
             <select name="semestername" id="semester-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
+                <option value="null">Select Semester</option>
                 {{#each semester}}
                 <option value="{{this.fsemestername}}">{{this.semestername}}</option>
                 {{/each}}
             </select>
         </div>
 
-        <div class="mb-4 col-span-1">
+        <div class="mb-4 block md:col-span-1">
             <label for="subject-select" class="block">Subject:</label>
             <select name="subjectname" id="subject-select" onchange="getModulelist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
-                {{#each subject}}
+                <option value="null">Select Subject</option>
+                {{!-- {{#each subject}}
                 <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
-                {{/each}}
+                {{/each}} --}}
+            </select>
+        </div>
+
+        <div class="mb-4 block md:col-span-1">
+            <label for="module-select" class="block">Module:</label>
+            <select name="modulename" id="module-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+                <option value="null">Select Module</option>
+                {{!-- {{#each module}}
+                <option value="{{this.fmodulename}}">{{this.modulename}}</option>
+                {{/each}} --}}
             </select>
         </div>
 
         <div class="mb-4 col-span-1">
             <label for="category-select" class="block">Category:</label>
             <select name="categoryname" id="category-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+                <option value="null">Select Category</option>
                 {{#each category}}
                 <option value="{{this.fcategoryname}}">{{this.categoryname}}</option>
                 {{/each}}
             </select>
         </div>
 
-        <div class="mb-4 col-span-1">
-            <label for="module-select" class="block">Module:</label>
-            <select name="modulename" id="module-select" class="border border-gray-400 px-4 py-2 rounded w-64">
-                {{#each module}}
-                <option value="{{this.fmodulename}}">{{this.modulename}}</option>
-                {{/each}}
-            </select>
-        </div>
-
-
-
 
         <div class="mb-4 col-span-2">
             <div class=" grid grid-cols-2 gap-4">
                 <div class="mb-4">
                     <label for="document-title" class="block">Document Title:</label>
-                    <input type="text" name="docname" id="document-title"
+                    <input type="text" name="docname" id="doc-name"
                         class="border border-gray-400 px-4 py-2 rounded w-full">
                 </div>
 
@@ -118,12 +135,13 @@
                     <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                         Upload Document:</label>
                     {{!-- <img src="" id="imgview" alt=""> --}}
-                    <input type="file" name="file" id="file" accept="*/*" onchange=" preview(event)"
+                    <input type="file" name="file" id="file" accept="*/*"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         placeholder="800">
+                    <input type="text" name="doclink" id="doc-link" hidden>
                 </div>
 
-                {{!-- <div role="status" id="preloader" hidden>
+                <div role="status" id="preloader" hidden>
                     Document Uploading
                     <svg aria-hidden="true"
                         class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -136,13 +154,19 @@
                             fill="currentFill"></path>
                     </svg>
                     <span class="sr-only">Loading...</span>
-                </div> --}}
+                </div>
             </div>
         </div>
 
         <div class="col-span-3">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+            <button type="button" onclick="uploadDoc()" class="bg-blue-500 text-white px-4 py-2 rounded">Upload
+                Doc</button>
         </div>
+
+        <div class="col-span-3">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+        </div>
+
     </form>
 
     <table class="min-w-full divide-y divide-gray-200 mt-12">
@@ -195,34 +219,17 @@
 
 <script>
 
-    function preview(e) {
-        document.getElementById('imgview').src = URL.createObjectURL(e.target.files[0])
-    }
-
     let image;
 
-    $("button").click(async function () {
+    async function uploadDoc() {
+        console.log('called');
         document.getElementById('preloader').style.display = "block";
-
         let image = await updateImageDisplay();
-
-        let name = document.getElementById('name').value;
-        let details = document.getElementById('details').value;
-
-        $.post("/auths/admin/results/add/",
-            {
-                details: details, name: name, image: image
-            },
-            function () {
-
-                alert('added');
-                document.getElementById('preloader').style.display = "none";
-
-                window.location = "http://localhost:3000/auths/admin/dashboard";
-            });
-
-    });
-
+        alert('added');
+        document.getElementById('preloader').style.display = "none";
+        var inputElement = document.getElementById('doc-link');
+        inputElement.value = image;
+    }
 
     const input = document.getElementById('file');
 
@@ -245,7 +252,6 @@
                     let url = `https://res.cloudinary.com/gbrozdev/${data.resource_type}/upload/v${data.version}/${data.public_id}.${data.format}`
                     console.log(url)
                     image = url;
-                    alert('image added');
                 })
         }
         return image;

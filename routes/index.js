@@ -168,7 +168,7 @@ router.post('/video', async function (req, res) {
     await db.get().collection('video').insertOne(data).then((response) => {
         console.log(response);
     });
-    res.redirect('/');
+    res.redirect('/addvideo');
 });
 
 router.get('/video/delete/:id', async function (req, res) {
@@ -187,7 +187,7 @@ router.post('/doc', async function (req, res) {
     await db.get().collection('doc').insertOne(data).then((response) => {
         console.log(response);
     });
-    res.redirect('/');
+    res.redirect('/adddoc');
 });
 
 router.get('/doc/delete/:id', async function (req, res) {
@@ -225,13 +225,18 @@ router.get('/modulelist', async (req, res) => {
         const selectedSemester = req.query.semester;
         const selectedSubject = req.query.subject;
 
-        const subjects = await db.get().collection('module').find({
+        console.log(selectedUniversity, selectedCourse, selectedSemester, selectedSubject);
+
+
+        const modules = await db.get().collection('module').find({
             universityname: selectedUniversity,
             coursename: selectedCourse,
             semestername: selectedSemester,
             subjectname: selectedSubject,
         }).toArray();
-        res.json(subjects);
+        console.log("modules");
+        console.log(modules);
+        res.json(modules);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -264,9 +269,25 @@ router.get('/modulelist', async (req, res) => {
 //     res.redirect('/auths/admin/dashboard')
 // }
 
-// router.get('/clean', async function(req, res) {
-//     await db.get().collection('orders').remove()
-//     res.redirect('back');
-// });
+router.get('/clean', async function (req, res) {
+    // await db.get().collection('orders').remove()
+    db.get().collection('module').drop()
+        .then(() => console.log('Module collection deleted.'))
+        .catch((error) => console.error('Error deleting Module collection:', error));
+
+    db.get().collection('subject').drop()
+        .then(() => console.log('Subject collection deleted.'))
+        .catch((error) => console.error('Error deleting Subject collection:', error));
+
+    db.get().collection('doc').drop()
+        .then(() => console.log('Doc collection deleted.'))
+        .catch((error) => console.error('Error deleting Doc collection:', error));
+
+    db.get().collection('video').drop()
+        .then(() => console.log('Video collection deleted.'))
+        .catch((error) => console.error('Error deleting Video collection:', error));
+    res.redirect('back');
+});
+
 
 module.exports = router;
