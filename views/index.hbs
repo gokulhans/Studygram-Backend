@@ -256,7 +256,7 @@
     <h2 class="text-xl font-semibold mb-2">Add Module</h2>
 
     <form action="/module" method="post">
-      <div class="mb-4">
+      {{!-- <div class="mb-4">
         <label for="university-select" class="block">University:</label>
         <select name="universityname" id="university-select" class="border border-gray-400 px-4 py-2 rounded w-64">
           {{#each university}}
@@ -279,16 +279,16 @@
           <option value="{{this.fsemestername}}">{{this.semestername}}</option>
           {{/each}}
         </select>
-      </div>
+      </div> --}}
 
-      <div class="mb-4">
+      {{!-- <div class="mb-4">
         <label for="subject-select" class="block">Subject:</label>
         <select name="subjectname" id="subject-select" class="border border-gray-400 px-4 py-2 rounded w-64">
           {{#each subject}}
           <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
           {{/each}}
         </select>
-      </div>
+      </div> --}}
 
       <div class="mb-4">
         <label for="module" class="block">Module Name</label>

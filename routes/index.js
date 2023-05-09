@@ -163,10 +163,8 @@ router.post('/subject', async function (req, res) {
     const subjectName = req.body.subjectname;
     const formattedSubjectName = subjectName.toLowerCase().replace(/\s/g, '-');
     req.body.fsubjectname = formattedSubjectName;
-
     // console.log(data);
     await db.get().collection('subject').insertOne(data).then((response) => {
-
         // console.log(response);
     });
     res.redirect('/');
@@ -244,13 +242,24 @@ router.get('/video/delete/:id', async function (req, res) {
 
 router.post('/doc', async function (req, res) {
     let data = req.body;
+    // console.log(data.subjectname);
+    if (data.subjectname == 'null') {
+        console.log(" f");
+        let subjectdata = {};
+        subjectdata.universityname = req.body.universityname;
+        subjectdata.coursename = req.body.coursename;
+        subjectdata.semestername = req.body.semestername;
+        const newSubject = req.body.newsubject;
+        subjectdata.subjectname = newSubject;
+        const formattedSubjectName = newSubject.toLowerCase().replace(/\s/g, '-');
+        subjectdata.fsubjectname = formattedSubjectName;
+        console.log(subjectdata);
+        await db.get().collection('subject').insertOne(subjectdata)
+    }
     const docTitle = req.body.docname;
     const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
     req.body.fdocname = formattedDocTitle;
-    // console.log(data);
-    await db.get().collection('doc').insertOne(data).then((response) => {
-        // console.log(response);
-    });
+    await db.get().collection('doc').insertOne(data)
     res.redirect('/adddoc');
 });
 
@@ -296,12 +305,7 @@ router.get('/modulelist', async (req, res) => {
         // console.log(selectedUniversity, selectedCourse, selectedSemester, selectedSubject);
 
 
-        const modules = await db.get().collection('module').find({
-            universityname: selectedUniversity,
-            coursename: selectedCourse,
-            semestername: selectedSemester,
-            subjectname: selectedSubject,
-        }).toArray();
+        const modules = await db.get().collection('module').find().toArray();
 
         // console.log("modules");
 

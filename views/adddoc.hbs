@@ -52,14 +52,20 @@
             moduleSelect.appendChild(option);
         });
     }
+
+    function enableButton() {
+        var button = document.getElementById("submit-button");
+        button.disabled = false;
+        button.style.backgroundColor = "blue";
+    }
 </script>
 
 <div id="doc-form" class="md:px-48 pt-8">
-    <form action="/doc" method="post" class="grid grid-cols-3 gap-4">
-        <h2 class="text-xl font-semibold mb-2 col-span-3">Add Document</h2>
+    <form action="/doc" method="post" class="flex flex-col items-center">
+        {{!-- <center class="text-xl font-semibold mb-3">Add Document</center> --}}
 
-        <div class="mb-4 block md:col-span-1">
-            <label for="university-select" class="block">University:</label>
+        <div class="mb-4 flex">
+            <label for="university-select" class="block mr-3 font-bold">University</label>
             <select name="universityname" id="university-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
                 {{!-- <option value="null">Select University</option> --}}
@@ -69,8 +75,8 @@
                 {{/each}}
             </select>
         </div>
-        <div class="mb-4 block md:col-span-1">
-            <label for="course-select" class="block">Course:</label>
+        <div class="mb-4 flex">
+            <label for="course-select" class="block mr-3 font-bold">Course:</label>
             <select name="coursename" id="course-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
                 <option value="null">Select Course</option>
@@ -80,8 +86,9 @@
                 {{/each}}
             </select>
         </div>
-        <div class="mb-4 block md:col-span-1">
-            <label for="semester-select" class="block">Semester:</label>
+
+        <div class="mb-4 flex">
+            <label for="semester-select" class="block mr-3 font-bold">Semester:</label>
             <select name="semestername" id="semester-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
                 <option value="null">Select Semester</option>
@@ -91,29 +98,33 @@
             </select>
         </div>
 
-        <div class="mb-4 block md:col-span-1">
-            <label for="subject-select" class="block">Subject:</label>
-            <select name="subjectname" id="subject-select" onchange="getModulelist()"
-                class="border border-gray-400 px-4 py-2 rounded w-64">
-                <option value="null">Select Subject</option>
-                {{!-- {{#each subject}}
-                <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
-                {{/each}} --}}
-            </select>
+        <div class="mb-4 flex">
+            <label for="subject-select" class="block mr-3 font-bold">Subject:</label>
+            <div class="flex flex-col">
+
+                <select name="subjectname" id="subject-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+                    <option value="null">Select Subject</option>
+                    {{!-- {{#each subject}}
+                    <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
+                    {{/each}} --}}
+                </select>
+                <input type="text" name="newsubject" id="doc-name"
+                    class="m-2 border border-gray-400 px-4 py-2 rounded w-64" placeholder="New Subject">
+            </div>
         </div>
 
-        <div class="mb-4 block md:col-span-1">
-            <label for="module-select" class="block">Module:</label>
+        <div class="mb-4 flex">
+            <label for="module-select" class="block mr-3 font-bold">Module:</label>
             <select name="modulename" id="module-select" class="border border-gray-400 px-4 py-2 rounded w-64">
                 <option value="null">Select Module</option>
-                {{!-- {{#each module}}
+                {{#each module}}
                 <option value="{{this.fmodulename}}">{{this.modulename}}</option>
-                {{/each}} --}}
+                {{/each}}
             </select>
         </div>
 
-        <div class="mb-4 col-span-1">
-            <label for="category-select" class="block">Category:</label>
+        <div class="mb-4 flex col-span-1">
+            <label for="category-select" class="block mr-3 font-bold">Category:</label>
             <select name="categoryname" id="category-select" class="border border-gray-400 px-4 py-2 rounded w-64">
                 <option value="null">Select Category</option>
                 {{#each category}}
@@ -123,25 +134,25 @@
         </div>
 
 
-        <div class="mb-4 col-span-2">
-            <div class=" grid grid-cols-2 gap-4">
-                <div class="mb-4">
-                    <label for="document-title" class="block">Document Title:</label>
+        <div class="mb-4 flex ">
+            <div class="">
+                <div class="mb-4 flex">
+                    <label for="document-title" class="block mr-3 font-bold">Title:</label>
                     <input type="text" name="docname" id="doc-name"
-                        class="border border-gray-400 px-4 py-2 rounded w-full">
+                        class="border border-gray-400 px-4 py-2 rounded w-64">
                 </div>
 
-                <div>
-                    <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                        Upload Document:</label>
+                <div class="flex">
+                    <label for="file" class="block mr-3 font-bold text-gray-900 dark:text-gray-300">
+                        Upload</label>
                     {{!-- <img src="" id="imgview" alt=""> --}}
                     <input type="file" name="file" id="file" accept="*/*"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block mr-3 font-bold w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         placeholder="800">
                     <input type="text" name="doclink" id="doc-link" hidden>
                 </div>
 
-                <div role="status" id="preloader" hidden>
+                <div id="preloader" class="p-3">
                     Document Uploading
                     <svg aria-hidden="true"
                         class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -155,21 +166,29 @@
                     </svg>
                     <span class="sr-only">Loading...</span>
                 </div>
+
+            </div>
+        </div>
+        <div class="flex">
+
+            <div class="px-5">
+                <button type="button" onclick="uploadDoc()" class="bg-orange-500 text-white px-4 py-2 rounded">Upload
+                    Doc</button>
+            </div>
+
+            <div class="">
+                <button type="submit" id="submit-button" class="bg-gray-500 text-white px-4 py-2 rounded"
+                    disabled>Submit</button>
             </div>
         </div>
 
-        <div class="col-span-3">
-            <button type="button" onclick="uploadDoc()" class="bg-blue-500 text-white px-4 py-2 rounded">Upload
-                Doc</button>
-        </div>
+        <div class="m-5 w-16 h-16">
 
-        <div class="col-span-3">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
         </div>
 
     </form>
 
-    <table class="min-w-full divide-y divide-gray-200 mt-12">
+    <table class="min-w-full divide-y divide-gray-200 mt-12 hidden">
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -216,7 +235,11 @@
 </div>
 
 
-
+<style>
+    #preloader {
+        display: none;
+    }
+</style>
 <script>
 
     let image;
@@ -224,11 +247,14 @@
     async function uploadDoc() {
         console.log('called');
         document.getElementById('preloader').style.display = "block";
+        console.log('done');
         let image = await updateImageDisplay();
-        alert('added');
         document.getElementById('preloader').style.display = "none";
+        console.log('done');
         var inputElement = document.getElementById('doc-link');
         inputElement.value = image;
+        alert('added');
+        enableButton()
     }
 
     const input = document.getElementById('file');
