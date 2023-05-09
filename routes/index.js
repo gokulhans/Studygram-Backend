@@ -242,9 +242,10 @@ router.get('/video/delete/:id', async function (req, res) {
 
 router.post('/doc', async function (req, res) {
     let data = req.body;
-    // console.log(data.subjectname);
+    console.log(data);
     if (data.subjectname == 'null') {
         // console.log("null");
+        req.body.subjectname = req.body.newsubject;
         let subjectdata = {};
         subjectdata.universityname = req.body.universityname;
         subjectdata.coursename = req.body.coursename;
@@ -260,7 +261,7 @@ router.post('/doc', async function (req, res) {
     const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
     req.body.fdocname = formattedDocTitle;
     await db.get().collection('doc').insertOne(data)
-    res.redirect('/adddoc');
+    // res.json({ "success": true });
 });
 
 router.get('/doc/delete/:id', async function (req, res) {

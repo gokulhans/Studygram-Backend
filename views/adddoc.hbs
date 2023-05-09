@@ -172,12 +172,12 @@
         <div class="flex">
 
             <div class="px-5">
-                <button type="button" onclick="uploadDoc()" class="bg-orange-500 text-white px-4 py-2 rounded">Upload
-                    Doc</button>
+                <a onclick="uploadDoc()" class="bg-orange-500 text-white px-4 py-2 rounded">Upload
+                    Doc</a>
             </div>
 
             <div class="">
-                <button type="submit" id="submit-button" class="bg-gray-500 text-white px-4 py-2 rounded"
+                <button type="button" id="submit-button" class="bg-gray-500 text-white px-4 py-2 rounded"
                     disabled>Submit</button>
             </div>
         </div>
@@ -282,4 +282,78 @@
         }
         return image;
     }
+
+
 </script>
+
+
+<script>
+    $("button").click(async function () {
+        console.log(' called');
+        let universityname = document.getElementById('university-select').value;
+        let coursename = document.getElementById('course-select').value;
+        let semestername = document.getElementById('semester-select').value;
+        let subjectname = document.getElementById('subject-select').value;
+        let newsubject = document.getElementById('doc-name').value;
+        let modulename = document.getElementById('module-select').value;
+        let categoryname = document.getElementById('category-select').value;
+        let docname = document.getElementById('doc-name').value;
+        let file = document.getElementById('file').files[0].name;
+        let doclink = document.getElementById('doc-link').value;
+
+        console.log(universityname, coursename, categoryname, modulename, newsubject, subjectname, docname, file, doclink)
+
+
+        $.post("/doc",
+            {
+                universityname: universityname,
+                coursename: coursename,
+                semestername: semestername,
+                subjectname: subjectname,
+                newsubject: newsubject,
+                modulename: modulename,
+                categoryname: categoryname,
+                docname: docname,
+                file: file,
+                doclink: doclink
+            },
+            function () {
+                alert('added');
+            });
+
+    });
+</script>
+{{!--
+document.querySelector('form').addEventListener('submit', function (event) {
+console.log(' called');
+
+let universityname = document.getElementById('university-select');
+let coursename = document.getElementById('course-select');
+let semestername = document.getElementById('semester-select');
+let subjectname = document.getElementById('subject-select');
+let newsubject = document.getElementById('newsubject').value;
+let modulename = document.getElementById('module-select');
+let categoryname = document.getElementById('category-select');
+let docname = document.getElementById('docname').value;
+let file = document.getElementById('file').value;
+let doclink = document.getElementById('doclink').value;
+
+console.log(universityname, coursename, categoryname, modulename, newsubject, subjectname, docname, file, doclink)
+
+$.post("/doc",
+{
+universityname: universityname,
+coursename: coursename,
+semestername: semestername,
+subjectname: subjectname,
+newsubject: newsubject,
+modulename: modulename,
+categoryname: categoryname,
+docname: docname,
+file: file,
+doclink: doclink
+},
+function () {
+alert('added');
+});
+}); --}}
