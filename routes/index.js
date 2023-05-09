@@ -244,7 +244,7 @@ router.post('/doc', async function (req, res) {
     let data = req.body;
     // console.log(data.subjectname);
     if (data.subjectname == 'null') {
-        console.log(" f");
+        // console.log("null");
         let subjectdata = {};
         subjectdata.universityname = req.body.universityname;
         subjectdata.coursename = req.body.coursename;
@@ -253,7 +253,7 @@ router.post('/doc', async function (req, res) {
         subjectdata.subjectname = newSubject;
         const formattedSubjectName = newSubject.toLowerCase().replace(/\s/g, '-');
         subjectdata.fsubjectname = formattedSubjectName;
-        console.log(subjectdata);
+        // console.log(subjectdata);
         await db.get().collection('subject').insertOne(subjectdata)
     }
     const docTitle = req.body.docname;
