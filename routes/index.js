@@ -406,16 +406,11 @@ router.get('/api/subject/:university/:course/:semester', async (req, res) => {
 
 // Module Endpoint
 router.get('/api/module/:university/:course/:semester/:subject', async (req, res) => {
-    const selectedUniversity = req.params.university;
-    const selectedCourse = req.params.course;
-    const selectedSemester = req.params.semester;
-    const selectedSubject = req.params.subject;
-    const modules = await db.get().collection('module').find({
-        universityname: selectedUniversity,
-        coursename: selectedCourse,
-        semestername: selectedSemester,
-        subjectname: selectedSubject,
-    }).toArray();
+    // const selectedUniversity = req.params.university;
+    // const selectedCourse = req.params.course;
+    // const selectedSemester = req.params.semester;
+    // const selectedSubject = req.params.subject;
+    const modules = await db.get().collection('module').find().toArray();
     res.json(modules);
 });
 
