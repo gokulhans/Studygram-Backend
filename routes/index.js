@@ -78,10 +78,10 @@ router.get('/adddoc', async function (req, res, next) {
     res.render('adddoc.hbs', { university, course, semester, category, subject, module, video, doc })
 });
 
-router.get('/refreshdocs', async function (req, res, next) {
+router.get('/alldocs', async function (req, res, next) {
     let doc = await db.get().collection('doc').find().toArray();
     doc = doc.reverse();
-    res.json(doc)
+    res.render('alldocs.hbs', { doc })
 });
 
 

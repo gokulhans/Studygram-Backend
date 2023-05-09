@@ -1,0 +1,46 @@
+<div id="doc-form" class="md:px-48 pt-8">
+    <table class="min-w-full divide-y divide-gray-200 mt-12 ">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    No
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Doc</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    University</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Course</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Semester</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Subject</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Module</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {{#each doc}}
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+                <td class="px-6 py-4 whitespace-nowrap"><a href="{{this.doclink}}" target="_blank"
+                        class="text-blue-500 underline">{{this.docname}}</a></td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.categoryname}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.universityname}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.semestername}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.subjectname}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.modulename}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <a href="/doc/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+                </td>
+            </tr>
+            {{/each}}
+            <!-- Add more table rows as needed -->
+        </tbody>
+    </table>
+</div>
