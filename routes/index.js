@@ -74,8 +74,17 @@ router.get('/adddoc', async function (req, res, next) {
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
+    doc = doc.reverse();
     res.render('adddoc.hbs', { university, course, semester, category, subject, module, video, doc })
 });
+
+router.get('/refreshdocs', async function (req, res, next) {
+    let doc = await db.get().collection('doc').find().toArray();
+    doc = doc.reverse();
+    res.json(doc)
+});
+
+
 
 router.get('/verify', async function (req, res, next) {
     // let doc = await db.get().collection('doc').find().toArray();
@@ -255,7 +264,16 @@ router.post('/doc', async function (req, res) {
         const formattedSubjectName = newSubject.toLowerCase().replace(/\s/g, '-');
         subjectdata.fsubjectname = formattedSubjectName;
         // console.log(subjectdata);
-        await db.get().collection('subject').insertOne(subjectdata)
+        const result = await db.get().collection('subject').findOne({
+            universityname: data.universityname,
+            coursename: data.coursename,
+            semestername: data.semestername,
+            subjectname: data.newsubject
+        });
+        console.log(result);
+        if (!result) {
+            await db.get().collection('subject').insertOne(subjectdata)
+        }
     }
     const docTitle = req.body.docname;
     const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');

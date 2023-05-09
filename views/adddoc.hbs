@@ -58,6 +58,12 @@
         button.disabled = false;
         button.style.backgroundColor = "blue";
     }
+
+    function disableButton() {
+        var button = document.getElementById("submit-button");
+        button.disabled = true;
+        button.style.backgroundColor = "gray";
+    }
 </script>
 
 <div id="doc-form" class="md:px-48 pt-8">
@@ -188,7 +194,7 @@
 
     </form>
 
-    <table class="min-w-full divide-y divide-gray-200 mt-12 hidden lg:block">
+    <table class="min-w-full divide-y divide-gray-200 mt-12 ">
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -316,13 +322,75 @@
                 docname: docname,
                 file: file,
                 doclink: doclink
-            },
-            function () {
-                alert('added');
-            });
-
-    });
+            },);
+        getSubjectlist();
+        alert('added');
+        disableButton();
+    }
+    );
 </script>
+{{!--
+function refreshTable() {
+fetch('/refreshdocs') // Create a new route for refreshing the table
+.then(response => response.json())
+.then(data => {
+const tableBody = document.querySelector('.table tbody');
+const tableHead = document.querySelector('.table thead');
+// Clear existing table rows
+tableBody.innerHTML = '';
+
+// Clear existing table head
+tableHead.innerHTML = '';
+
+// Rebuild table head
+const tableHeadRow = document.createElement('tr');
+tableHeadRow.innerHTML = `
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    No
+</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Doc</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Category </th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    University</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Course</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Semester</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Subject</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Module</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    Actions</th>
+`;
+
+tableHead.appendChild(tableHeadRow);
+
+// Rebuild table body
+data.forEach(item => {
+const row = document.createElement('tr');
+row.innerHTML = `
+<td class="px-6 py-4 whitespace-nowrap">${item.index}</td>
+<td class="px-6 py-4 whitespace-nowrap"><a href="${item.doclink}" target="_blank"
+        class="text-blue-500 underline">${item.docname}</a></td>
+<td class="px-6 py-4 whitespace-nowrap">${item.categoryname}</td>
+<td class="px-6 py-4 whitespace-nowrap">${item.universityname}</td>
+<td class="px-6 py-4 whitespace-nowrap">${item.coursename}</td>
+<td class="px-6 py-4 whitespace-nowrap">${item.semestername}</td>
+<td class="px-6 py-4 whitespace-nowrap">${item.subjectname}</td>
+<td class="px-6 py-4 whitespace-nowrap">${item.modulename}</td>
+<td class="px-6 py-4 whitespace-nowrap">
+    <a href="/doc/delete/${item._id}" class="text-red-500 hover:text-red-700">Delete</a>
+</td>
+`;
+tableBody.appendChild(row);
+});
+});
+} --}}
+
+
 {{!--
 document.querySelector('form').addEventListener('submit', function (event) {
 console.log(' called');
