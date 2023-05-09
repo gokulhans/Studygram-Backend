@@ -13,8 +13,7 @@ router.get('/', async function (req, res, next) {
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
-
-    // console.log(university);
+    console.log(video);
     res.render('index.hbs', { university, course, semester, category, subject, module, video, doc })
     // let user = null;
     // if (req.session) {
@@ -373,9 +372,94 @@ router.get('/modulelist', async (req, res) => {
 // });
 
 
-router.get('/university', async (req, res) => {
-    let university = await db.get().collection('university').find().toArray();
-    res.json(university);
+// University Endpoint
+router.get('/api/university', async (req, res) => {
+    let universities = await db.get().collection('university').find().toArray();
+    res.json(universities);
+});
+
+// Course Endpoint
+router.get('/api/course', async (req, res) => {
+    let courses = await db.get().collection('course').find().toArray();
+    res.json(courses);
+});
+
+// Semester Endpoint
+router.get('/api/semester', async (req, res) => {
+    let semesters = await db.get().collection('semester').find().toArray();
+    res.json(semesters);
+});
+
+// Subject Endpoint
+router.get('/api/subject/:university/:course/:semester', async (req, res) => {
+    const selectedUniversity = req.params.university;
+    const selectedCourse = req.params.course;
+    const selectedSemester = req.params.semester;
+    const subjects = await db.get().collection('subject').find({
+        universityname: selectedUniversity,
+        coursename: selectedCourse,
+        semestername: selectedSemester,
+    }).toArray();
+    // let subjects = await db.get().collection('subject').find().toArray();
+    res.json(subjects);
+});
+
+// Module Endpoint
+router.get('/api/module/:university/:course/:semester/:subject', async (req, res) => {
+    const selectedUniversity = req.params.university;
+    const selectedCourse = req.params.course;
+    const selectedSemester = req.params.semester;
+    const selectedSubject = req.params.subject;
+    const modules = await db.get().collection('module').find({
+        universityname: selectedUniversity,
+        coursename: selectedCourse,
+        semestername: selectedSemester,
+        subjectname: selectedSubject,
+    }).toArray();
+    res.json(modules);
+});
+
+// Category Endpoint
+router.get('/api/category', async (req, res) => {
+    let categories = await db.get().collection('category').find().toArray();
+    res.json(categories);
+});
+
+// Video Endpoint
+router.get('/api/video/:university/:course/:semester/:subject/:module', async (req, res) => {
+    const selectedUniversity = req.params.university;
+    const selectedCourse = req.params.course;
+    const selectedSemester = req.params.semester;
+    const selectedSubject = req.params.subject;
+    const selectedModule = req.params.module;
+    const videos = await db.get().collection('video').find({
+        universityname: selectedUniversity,
+        coursename: selectedCourse,
+        semestername: selectedSemester,
+        subjectname: selectedSubject,
+        modulename: selectedModule,
+    }).toArray();
+    res.json(videos);
+});
+
+// Doc Endpoint
+router.get('/api/doc/:university/:course/:semester/:subject/:module/:category', async (req, res) => {
+    const selectedUniversity = req.params.university;
+    const selectedCourse = req.params.course;
+    const selectedSemester = req.params.semester;
+    const selectedSubject = req.params.subject;
+    const selectedModule = req.params.module;
+    const selectedCategory = req.params.category;
+    const docs = await db.get().collection('doc').find({
+        universityname: selectedUniversity,
+        coursename: selectedCourse,
+        semestername: selectedSemester,
+        subjectname: selectedSubject,
+        modulename: selectedModule,
+        categoryname: selectedCategory
+    }).toArray();
+    console.log(docs);
+    res.json(docs);
 });
 
 
