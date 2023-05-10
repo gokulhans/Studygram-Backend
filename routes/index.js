@@ -78,6 +78,46 @@ router.get('/adddoc', async function (req, res, next) {
     res.render('adddoc.hbs', { university, course, semester, category, subject, module, video, doc })
 });
 
+
+router.post('/doc', async function (req, res) {
+    let data = req.body;
+    console.log(data);
+    if (data.subjectname == 'null') {
+        // console.log("null");
+        req.body.subjectname = req.body.newsubject;
+        let subjectdata = {};
+        subjectdata.universityname = req.body.universityname;
+        subjectdata.coursename = req.body.coursename;
+        subjectdata.semestername = req.body.semestername;
+        const newSubject = req.body.newsubject;
+        subjectdata.subjectname = newSubject;
+        const formattedSubjectName = newSubject.toLowerCase().replace(/\s/g, '-');
+        subjectdata.fsubjectname = formattedSubjectName;
+        // console.log(subjectdata);
+        const result = await db.get().collection('subject').findOne({
+            universityname: data.universityname,
+            coursename: data.coursename,
+            semestername: data.semestername,
+            subjectname: data.newsubject
+        });
+        console.log(result);
+        if (!result) {
+            await db.get().collection('subject').insertOne(subjectdata)
+        }
+    }
+    const docTitle = req.body.docname;
+    const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
+    req.body.fdocname = formattedDocTitle;
+    await db.get().collection('doc').insertOne(data)
+    // res.json({ "success": true });
+});
+
+router.get('/doc/delete/:id', async function (req, res) {
+    let id = req.params.id;
+    await db.get().collection('doc').deleteOne({ _id: ObjectId(id) });
+    res.redirect('/');
+});
+
 router.get('/alldocs', async function (req, res, next) {
     let doc = await db.get().collection('doc').find().toArray();
     doc = doc.reverse();
@@ -249,44 +289,6 @@ router.get('/video/delete/:id', async function (req, res) {
 });
 
 
-router.post('/doc', async function (req, res) {
-    let data = req.body;
-    console.log(data);
-    if (data.subjectname == 'null') {
-        // console.log("null");
-        req.body.subjectname = req.body.newsubject;
-        let subjectdata = {};
-        subjectdata.universityname = req.body.universityname;
-        subjectdata.coursename = req.body.coursename;
-        subjectdata.semestername = req.body.semestername;
-        const newSubject = req.body.newsubject;
-        subjectdata.subjectname = newSubject;
-        const formattedSubjectName = newSubject.toLowerCase().replace(/\s/g, '-');
-        subjectdata.fsubjectname = formattedSubjectName;
-        // console.log(subjectdata);
-        const result = await db.get().collection('subject').findOne({
-            universityname: data.universityname,
-            coursename: data.coursename,
-            semestername: data.semestername,
-            subjectname: data.newsubject
-        });
-        console.log(result);
-        if (!result) {
-            await db.get().collection('subject').insertOne(subjectdata)
-        }
-    }
-    const docTitle = req.body.docname;
-    const formattedDocTitle = docTitle.toLowerCase().replace(/\s/g, '-');
-    req.body.fdocname = formattedDocTitle;
-    await db.get().collection('doc').insertOne(data)
-    // res.json({ "success": true });
-});
-
-router.get('/doc/delete/:id', async function (req, res) {
-    let id = req.params.id;
-    await db.get().collection('doc').deleteOne({ _id: ObjectId(id) });
-    res.redirect('/');
-});
 
 router.get('/subjectlist', async (req, res) => {
     try {
