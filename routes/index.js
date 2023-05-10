@@ -47,7 +47,8 @@ router.get('/contribute', async function (req, res, next) {
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
-    res.render('contribute.hbs', { university, course, semester, category, subject, module, video, doc })
+    doc = doc.reverse();
+    res.render('contribute.hbs', { university, course, semester, category, subject, module, video, doc });
 });
 
 router.post('/contribute/:id', async function (req, res) {
@@ -59,9 +60,11 @@ router.post('/contribute/:id', async function (req, res) {
     req.body.userid = userid;
     req.body.verify = false;
     console.log(data);
-    await db.get().collection('doc').insertOne(data).then((response) => {
+
+    await db.get().collection('cdoc').insertOne(data).then((response) => {
         console.log(response);
     });
+
     res.redirect('/contribute');
 });
 
@@ -128,24 +131,15 @@ router.get('/alldocs', async function (req, res, next) {
 
 router.get('/verify', async function (req, res, next) {
     // let doc = await db.get().collection('doc').find().toArray();
-    let doc = await db.get().collection('doc').find({ verify: false }).toArray();
+    let doc = await db.get().collection('cdoc').find({}).toArray();
     res.render('verify.hbs', { doc })
 });
 
 router.get('/doc/verify/:id', async function (req, res, next) {
     let id = req.params.id
-    let doc = await db.get().collection('doc');
-    doc.updateOne(
-        { _id: ObjectId(id) }, // Filter to find the document to update
-        { $set: { verify: true } }, // Update operation to set the verify field to true
-        function (err, result) {
-            if (err) {
-                console.error('Error updating document:', err);
-            } else {
-                console.log('Document updated successfully', result);
-            }
-        }
-    );
+    let doc = await db.get().collection('cdoc').findOne({ _id: ObjectId(id) });
+    await db.get().collection('doc').insertOne(doc);
+    await db.get().collection('cdoc').deleteOne({ _id: ObjectId(id) });
     res.redirect('/verify')
 });
 
@@ -340,21 +334,44 @@ router.get('/modulelist', async (req, res) => {
 });
 
 
+
+router.get('/noti', async function (req, res) {
+    let data = await db.get().collection('notis').find({}).toArray();
+    res.render('notis.hbs',{data})
+});
+
+router.get('/addnoti', async function (req, res) {
+    let university = await db.get().collection('university').find().toArray();
+    res.render('addnoti.hbs',{university})
+});
+
+router.post('/addnoti', async function (req, res) {
+    let data = req.body;
+    await db.get().collection('notis').insertOne(data)
+    res.redirect('/noti');
+});
+
+router.get('/noti/delete/:id', async function (req, res) {
+    let id = req.params.id;
+    await db.get().collection('notis').deleteOne({ _id: ObjectId(id) });
+    res.redirect('/noti');
+});
+
 // const getAllProducts = async function(req, res) {
 //     let data = await db.get().collection('products').find().toArray()
-//     
+//
 // console.log(data);
 //     res.render('pages/allproducts', { data, user: req.session.user });
 // }
 // const addProduct = async function(req, res) {
 //     let data = req.body
-//     
+//
 // console.log(data);
 //     await db.get().collection('products').insertOne(data)
 //     res.render('pages/product', { data })
 // }
 // const editProduct = async function(req, res) {
-//     
+//
 // console.log(req.body);
 //     let newdata = req.body
 //     let query = { _id: ObjectId(req.body.id) }
@@ -396,6 +413,13 @@ router.get('/modulelist', async (req, res) => {
 //                                     res.redirect('back');
 // });
 
+
+// Noti Endpoint
+
+router.get('/api/noti', async (req, res) => {
+    let notis = await db.get().collection('notis').find().toArray();
+    res.json(notis);
+});
 
 // University Endpoint
 router.get('/api/university', async (req, res) => {

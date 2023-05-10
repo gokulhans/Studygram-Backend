@@ -1,0 +1,39 @@
+<div id="doc-form" class="md:px-48 pt-8">
+    <form action="/addnoti" method="post" class="flex flex-col items-center">
+        {{!-- <center class="text-xl font-semibold mb-3">Add Document</center> --}}
+
+        <div class="mb-4 flex">
+            <label for="university-select" class="block mr-3 font-bold">University</label>
+            <select name="universityname" id="university-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+                {{!-- <option value="null">Select University</option> --}}
+                {{#each university}}
+                <option value="{{this.funiname}}">{{this.uniname}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-4 flex">
+            <label for="title" class="block mr-3 font-bold">Title:</label>
+            <input type="text" name="title" id="doc-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+        </div>
+
+        <div class="mb-4 flex">
+            <label for="doc-desc" class="block mr-3 font-bold">Description:</label>
+            <input type="text" name="desc" id="doc-desc" class="border border-gray-400 px-4 py-2 rounded w-64">
+        </div>
+        <div class="mb-4 flex">
+            <label for="link" class="block mr-3 font-bold">Link:</label>
+            <input type="text" name="link" id="link" class="border border-gray-400 px-4 py-2 rounded w-64">
+        </div>
+        <div class="flex">
+            <div class="">
+                <button type="submit" id="submit-button"
+                    class="bg-gray-500 text-white px-4 py-2 rounded">Submit</button>
+            </div>
+        </div>
+
+        <div class="m-5 w-16 h-16">
+
+        </div>
+
+    </form>
+</div>
