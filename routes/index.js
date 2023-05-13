@@ -13,6 +13,7 @@ router.get('/', async function (req, res, next) {
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
+    subject = subject.reverse();
     console.log(video);
     res.render('index.hbs', { university, course, semester, category, subject, module, video, doc })
     // let user = null;
