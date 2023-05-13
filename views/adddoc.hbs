@@ -1,26 +1,61 @@
+{{!-- const universitySelect = document.getElementById('university-select');
+const courseSelect = document.getElementById('course-select');
+const semesterSelect = document.getElementById('semester-select');
+let selectedUniversity = universitySelect.value;
+let selectedCourse = courseSelect.value;
+let selectedSemester = semesterSelect.value;
+const response = await
+fetch(`/subjectlist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}`);
+const subjects = await response.json(); --}}
+
 <script>
+    document.addEventListener("DOMContentLoaded", getSubjectlist);
+
     async function getSubjectlist() {
         console.log("get subject list");
-        const universitySelect = document.getElementById('university-select');
-        const courseSelect = document.getElementById('course-select');
-        const semesterSelect = document.getElementById('semester-select');
+
         const subjectSelect = document.getElementById('subject-select');
-        let selectedUniversity = universitySelect.value;
-        let selectedCourse = courseSelect.value;
-        let selectedSemester = semesterSelect.value;
-        const response = await fetch(`/subjectlist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}`);
-        const subjects = await response.json();
         subjectSelect.innerHTML = '';
+
         const nullOption = document.createElement('option');
         nullOption.value = 'null';
         nullOption.textContent = 'Select Subject';
+
+        const CommonCourseEnglish = document.createElement('option');
+        CommonCourseEnglish.value = 'common-course-english';
+        CommonCourseEnglish.textContent = 'Common Course English';
+
+        const ComplementeryCourse = document.createElement('option');
+        ComplementeryCourse.value = 'complementery-course';
+        ComplementeryCourse.textContent = 'Complementery Course';
+
+        const CoreCourse = document.createElement('option');
+        CoreCourse.value = 'core-course';
+        CoreCourse.textContent = 'Core Course';
+
+        const CommonCourseOther = document.createElement('option');
+        CommonCourseOther.value = 'common-course-other';
+        CommonCourseOther.textContent = 'Common Course Other';
+
+        const OpenCourse = document.createElement('option');
+        OpenCourse.value = 'open-course';
+        OpenCourse.textContent = 'Open Course';
+
+
         subjectSelect.appendChild(nullOption);
-        subjects.forEach((subject) => {
-            const option = document.createElement('option');
-            option.value = subject.fsubjectname;
-            option.textContent = subject.subjectname;
-            subjectSelect.appendChild(option);
-        });
+        subjectSelect.appendChild(CommonCourseEnglish);
+        subjectSelect.appendChild(CommonCourseOther);
+        subjectSelect.appendChild(CoreCourse);
+        subjectSelect.appendChild(ComplementeryCourse);
+        subjectSelect.appendChild(OpenCourse);
+
+
+        // subjects.forEach((subject) => {
+        // const option = document.createElement('option');
+        // option.value = subject.fsubjectname;
+        //  option.textContent = subject.subjectname;
+        //    subjectSelect.appendChild(option);
+        // });
     }
 
     async function getModulelist() {
