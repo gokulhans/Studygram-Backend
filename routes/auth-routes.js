@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const authsController = require("../controllers/auths-controller");
 const adminControllers = require("../controllers/admins-controller");
+const {login,register } = require("../controllers/auth.js");
+
+
 const {
     requiredadmin
 } = require("../authentication");
@@ -15,6 +18,9 @@ const hide = (req, res, next) => {
 }
 
 // user
+
+router.post("/login", login);
+router.post("/register", register);
 router.get('/signup', authsController.getSignup);
 router.post("/signup", authsController.postSignup);
 router.get('/signin', authsController.getSignin);

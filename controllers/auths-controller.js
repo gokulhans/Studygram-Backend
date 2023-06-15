@@ -18,7 +18,10 @@ const postSignup = async function(req, res) {
             req.session.user = response
             console.log(response);
     // res.status(201).json([{ "id": response.insertedId }]);
-            res.redirect('/doctors/alldoctors/')
+    let userid = savedUser._id.toString();
+    // //console.log(userid);
+    res.status(201).json([{ "id": userid }]);
+            // res.redirect('/doctors/alldoctors/')
         } else {
             req.session.loggedIN = false;
             res.redirect('/auths/signup')

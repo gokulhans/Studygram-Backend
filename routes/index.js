@@ -130,6 +130,31 @@ router.get('/alldocs', async function (req, res, next) {
 
 
 
+
+router.get('/addcommunity', async function (req, res, next) {
+    res.render('addcommunity.hbs')
+});
+
+router.post('/community', async function (req, res) {
+    let data = req.body
+    const communityName = req.body.uniname;
+    const formattedCommunityName = universityName.toLowerCase().replace(/\s/g, '-');
+    req.body.funiname = formattedUniversityName;
+    // console.log(data);
+    await db.get().collection('university').insertOne(data).then((response) => {
+        // console.log(response);
+    })
+    res.redirect('/')
+});
+
+router.get('/university/delete/:id', async function (req, res) {
+    let id = req.params.id
+    await db.get().collection('university').deleteOne({ _id: ObjectId(id) })
+    res.redirect('/')
+});
+
+
+
 router.get('/verify', async function (req, res, next) {
     // let doc = await db.get().collection('doc').find().toArray();
     let doc = await db.get().collection('cdoc').find({}).toArray();
@@ -338,12 +363,12 @@ router.get('/modulelist', async (req, res) => {
 
 router.get('/noti', async function (req, res) {
     let data = await db.get().collection('notis').find({}).toArray();
-    res.render('notis.hbs',{data})
+    res.render('notis.hbs', { data })
 });
 
 router.get('/addnoti', async function (req, res) {
     let university = await db.get().collection('university').find().toArray();
-    res.render('addnoti.hbs',{university})
+    res.render('addnoti.hbs', { university })
 });
 
 router.post('/addnoti', async function (req, res) {
