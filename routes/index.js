@@ -135,6 +135,10 @@ router.get('/addcommunity', async function (req, res, next) {
     res.render('addcommunity.hbs')
 });
 
+router.get('/community', async function (req, res, next) {
+    res.render('community.hbs')
+});
+
 router.post('/community', async function (req, res) {
     let data = req.body
     const communityName = req.body.uniname;
