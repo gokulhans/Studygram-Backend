@@ -164,7 +164,9 @@ router.get('/community', async function (req, res) {
 router.get('/community/:id', async function (req, res) {
     let id = req.params.id
     let community = await db.get().collection('community').findOne({ _id: ObjectId(id) });
-    let chat = await db.get().collection('chat').find({ community: community._id }).toArray()
+    console.log(community._id);
+    let chat2 = await db.get().collection('chat').find({}).toArray()
+    let chat = await db.get().collection('chat').find({ community: id }).toArray()
     console.log(community);
     console.log(chat);
     let user = req.session.user;
