@@ -13,9 +13,12 @@ router.get('/', async function (req, res, next) {
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
+    let community = await db.get().collection('community').find().toArray();
+    let user = req.session.user;
+    console.log(user);
     subject = subject.reverse();
     console.log(video);
-    res.render('index.hbs', { university, course, semester, category, subject, module, video, doc })
+    res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community })
     // let user = null;
     // if (req.session) {
     //     user = req.session.user
@@ -129,26 +132,57 @@ router.get('/alldocs', async function (req, res, next) {
 });
 
 
-
-
-router.get('/addcommunity', async function (req, res, next) {
-    res.render('addcommunity.hbs')
-});
-
-router.get('/community', async function (req, res, next) {
-    res.render('community.hbs')
-});
-
 router.post('/community', async function (req, res) {
-    let data = req.body
-    const communityName = req.body.uniname;
-    const formattedCommunityName = universityName.toLowerCase().replace(/\s/g, '-');
-    req.body.funiname = formattedUniversityName;
+    let data = req.body;
+    const courseName = req.body.communityname;
+    const formattedCourseName = courseName.toLowerCase().replace(/\s/g, '-');
+    req.body.fcommunityname = formattedCourseName;
     // console.log(data);
-    await db.get().collection('university').insertOne(data).then((response) => {
+    await db.get().collection('community').insertOne(data).then((response) => {
+        // console.log(response);
+    });
+    res.redirect('/');
+});
+
+router.get('/community/delete/:id', async function (req, res) {
+    let id = req.params.id;
+    await db.get().collection('community').deleteOne({ _id: ObjectId(id) });
+    res.redirect('/');
+});
+
+router.get('/community', async function (req, res) {
+    let user = req.session.user;
+    console.log(user);
+    if (user) {
+        let community = await db.get().collection('community').find().toArray();
+        res.render('community.hbs', { community })
+    } else {
+        res.render('communitylogin.hbs')
+    }
+});
+
+router.get('/community/:id', async function (req, res) {
+    let id = req.params.id
+    let community = await db.get().collection('community').findOne({ _id: ObjectId(id) });
+    let chat = await db.get().collection('chat').find().toArray()
+    console.log(community);
+    console.log(chat);
+    let user = req.session.user;
+    res.render('chat.hbs', { community, user, chat })
+});
+
+router.post('/chat/:id', async function (req, res) {
+    let user = req.session.user
+    let data = req.body
+    let id = req.params.id
+    req.body.community = id;
+    req.body.user = user.user.name;
+    // console.log(data);
+    await db.get().collection('chat').insertOne(data).then((response) => {
         // console.log(response);
     })
-    res.redirect('/')
+    const redirectTo = `/community/${id}`;
+    res.redirect(redirectTo)
 });
 
 router.get('/university/delete/:id', async function (req, res) {
@@ -172,6 +206,7 @@ router.get('/doc/verify/:id', async function (req, res, next) {
     await db.get().collection('cdoc').deleteOne({ _id: ObjectId(id) });
     res.redirect('/verify')
 });
+
 
 router.post('/university', async function (req, res) {
     let data = req.body

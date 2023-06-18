@@ -9,9 +9,9 @@
       <li><a href="#" class="block sidebar-link" data-form="subject">Subject</a></li>
       <li><a href="#" class="block sidebar-link" data-form="category">Catagory</a></li>
       <li><a href="#" class="block sidebar-link" data-form="module">Module</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="community">Community</a></li>
       <li><a href="/addvideo" class="block">Video</a></li>
       <li><a href="/adddoc" class="block">Doc</a></li>
-      <li><a href="/addcommunity" class="block">Community</a></li>
     </ul>
   </nav>
 </aside>
@@ -26,6 +26,8 @@
     <form action="/university" method="post">
 
       <h2 class="text-xl font-semibold mb-2">Add University</h2>
+            {{!-- {{user.user.name}} --}}
+
       <div class="mb-4">
         <label for="university-name" class="block">University Name:</label>
         <input name="uniname" type="text" id="university-name" class="border border-gray-400 px-4 py-2 rounded w-64">
@@ -89,6 +91,52 @@
           <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
           <td class="px-6 py-4 whitespace-nowrap">
             <a href="/course/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+
+
+  </div>
+
+
+  <!-- Community Form -->
+  <div id="community-form" class="tab hidden">
+
+    <form action="/community" method="post">
+      <h2 class="text-xl font-semibold mb-2">Add Community</h2>
+      <div class="mb-4">
+        <label for="course-name" class="block">Community Name:</label>
+        <input name="communityname" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <div class="mb-4">
+        <label for="course-name" class="block">Community Image Link:</label>
+        <input name="image" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Community Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each community}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.communityname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/community/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
           </td>
         </tr>
         {{/each}}

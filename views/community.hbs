@@ -1,0 +1,21 @@
+<div class="w-full h-full">
+    <div class="container mx-auto">
+        <center>
+            <h1 class="text-2xl font-bold m-5">Communities</h1>
+        </center>
+
+        <div class="">
+            {{#each community}}
+            <a href="/community/{{this._id}}" class=" bg-white rounded border p-4 h-24 flex items-center"
+                id="{{this._id}}">
+                <img src="{{this.image}}" alt="User 3" class="w-12 h-12 rounded-full mr-4">
+                <div>
+                    <h2 class="font-bold">{{this.communityname}}</h2>
+                    {{!-- <p class="text-gray-500">Can you help me with something?</p> --}}
+                </div>
+            </a>
+            {{/each}}
+
+        </div>
+    </div>
+</div>
