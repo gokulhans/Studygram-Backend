@@ -557,15 +557,13 @@ router.get('/api/doc/:university/:course/:semester/:subject/:module/:category', 
     const selectedCourse = req.params.course;
     const selectedSemester = req.params.semester;
     const selectedSubject = req.params.subject;
-    // const selectedModule = req.params.module;
-    const selectedModule = '{ community: ObjectId(community._id) }';
+    const selectedModule = req.params.module;
     const selectedCategory = req.params.category;
     const docs = await db.get().collection('doc').find({
         universityname: selectedUniversity,
         coursename: selectedCourse,
         semestername: selectedSemester,
         subjectname: selectedSubject,
-        modulename: selectedModule,
         categoryname: selectedCategory
     }).toArray();
     console.log(docs);
