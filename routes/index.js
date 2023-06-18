@@ -164,7 +164,7 @@ router.get('/community', async function (req, res) {
 router.get('/community/:id', async function (req, res) {
     let id = req.params.id
     let community = await db.get().collection('community').findOne({ _id: ObjectId(id) });
-    let chat = await db.get().collection('chat').find().toArray()
+    let chat = await db.get().collection('chat').find({ community: community._id }).toArray()
     console.log(community);
     console.log(chat);
     let user = req.session.user;
@@ -557,7 +557,8 @@ router.get('/api/doc/:university/:course/:semester/:subject/:module/:category', 
     const selectedCourse = req.params.course;
     const selectedSemester = req.params.semester;
     const selectedSubject = req.params.subject;
-    const selectedModule = req.params.module;
+    // const selectedModule = req.params.module;
+    const selectedModule = '{ community: ObjectId(community._id) }';
     const selectedCategory = req.params.category;
     const docs = await db.get().collection('doc').find({
         universityname: selectedUniversity,
