@@ -14,11 +14,12 @@ router.get('/', async function (req, res, next) {
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
     let community = await db.get().collection('community').find().toArray();
+    let users = await db.get().collection('users').find().toArray();
     let user = req.session.user;
     console.log(user);
     subject = subject.reverse();
     console.log(video);
-    res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community })
+    res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community, users })
     // let user = null;
     // if (req.session) {
     //     user = req.session.user
@@ -147,6 +148,12 @@ router.post('/community', async function (req, res) {
 router.get('/community/delete/:id', async function (req, res) {
     let id = req.params.id;
     await db.get().collection('community').deleteOne({ _id: ObjectId(id) });
+    res.redirect('/');
+});
+
+router.get('/users/delete/:id', async function (req, res) {
+    let id = req.params.id;
+    await db.get().collection('users').deleteOne({ _id: ObjectId(id) });
     res.redirect('/');
 });
 

@@ -10,6 +10,7 @@
       <li><a href="#" class="block sidebar-link" data-form="category">Catagory</a></li>
       <li><a href="#" class="block sidebar-link" data-form="module">Module</a></li>
       <li><a href="#" class="block sidebar-link" data-form="community">Community</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="users">Users</a></li>
       <li><a href="/addvideo" class="block">Video</a></li>
       <li><a href="/adddoc" class="block">Doc</a></li>
     </ul>
@@ -26,7 +27,7 @@
     <form action="/university" method="post">
 
       <h2 class="text-xl font-semibold mb-2">Add University</h2>
-            {{!-- {{user.user.name}} --}}
+      {{!-- {{user.user.name}} --}}
 
       <div class="mb-4">
         <label for="university-name" class="block">University Name:</label>
@@ -137,6 +138,42 @@
           <td class="px-6 py-4 whitespace-nowrap">{{this.communityname}}</td>
           <td class="px-6 py-4 whitespace-nowrap">
             <a href="/community/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+
+
+  </div>
+  <!-- Users Form -->
+  <div id="users-form" class="tab hidden">
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Users Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Users Email</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Phone</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each users}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.name}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.gmail}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.phone}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/users/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
           </td>
         </tr>
         {{/each}}
