@@ -1,0 +1,25 @@
+<div class="m-16">
+    <form action="/course/edit/{{course._id}}" method="post">
+        <h2 class="text-xl font-semibold mb-2">Edit Course</h2>
+        <div class="mb-4">
+            <label for="course-name" class="block">Course Name:</label>
+            <input name="coursename" value="{{course.coursename}}" type="text" id="course-name"
+                class="border border-gray-400 px-4 py-2 rounded w-64">
+        </div>
+        <div class="mb-4">
+            <label for="course-name" class="block">Select Stream:</label>
+            <select name="stream" value="{{course.stream}}" id="stream"
+                class="border border-gray-400 px-4 py-2 rounded w-64">
+                {{#each stream}}
+                <option value="{{this.fstreamname}}">{{this.streamname}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="course-name" class="block">Course Image:</label>
+            <input name="image" value="{{course.image}}" type="text" id="course-name"
+                class="border border-gray-400 px-4 py-2 rounded w-64">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+</div>

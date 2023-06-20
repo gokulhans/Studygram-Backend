@@ -10,6 +10,7 @@
       <li><a href="#" class="block sidebar-link" data-form="category">Catagory</a></li>
       <li><a href="#" class="block sidebar-link" data-form="module">Module</a></li>
       <li><a href="#" class="block sidebar-link" data-form="community">Community</a></li>
+      <li><a href="#" class="block sidebar-link" data-form="stream">Stream</a></li>
       <li><a href="#" class="block sidebar-link" data-form="users">Users</a></li>
       <li><a href="/addvideo" class="block">Video</a></li>
       <li><a href="/adddoc" class="block">Doc</a></li>
@@ -28,10 +29,13 @@
 
       <h2 class="text-xl font-semibold mb-2">Add University</h2>
       {{!-- {{user.user.name}} --}}
-
       <div class="mb-4">
         <label for="university-name" class="block">University Name:</label>
         <input name="uniname" type="text" id="university-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <div class="mb-4">
+        <label for="course-name" class="block">University Image:</label>
+        <input name="image" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
       </div>
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
     </form>
@@ -43,6 +47,8 @@
           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             University Name</th>
           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Logo</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             Actions</th>
         </tr>
       </thead>
@@ -51,6 +57,7 @@
         <tr>
           <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{this.uniname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap"><img src="{{this.image}}" width="40px" alt=""></td>
           <td class="px-6 py-4 whitespace-nowrap">
             <a href="/university/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
           </td>
@@ -71,6 +78,18 @@
         <label for="course-name" class="block">Course Name:</label>
         <input name="coursename" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
       </div>
+      <div class="mb-4">
+        <label for="course-name" class="block">Select Stream:</label>
+        <select name="stream" id="stream" class="border border-gray-400 px-4 py-2 rounded w-64">
+          {{#each stream}}
+          <option value="{{this.fstreamname}}">{{this.streamname}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="course-name" class="block">Course Image:</label>
+        <input name="image" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
     </form>
 
@@ -82,6 +101,10 @@
           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             Course Name</th>
           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Stream</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Logo</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             Actions</th>
         </tr>
       </thead>
@@ -90,6 +113,11 @@
         <tr>
           <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.stream}}</td>
+          <td class="px-6 py-4 whitespace-nowrap"><img src="{{this.image}}" alt="" width="40px"></td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/course/edit/{{this._id}}" class="text-blue-500 hover:text-red-700">Edit</a>
+          </td>
           <td class="px-6 py-4 whitespace-nowrap">
             <a href="/course/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
           </td>
@@ -148,6 +176,50 @@
 
 
   </div>
+
+
+  <!-- Community Form -->
+  <div id="stream-form" class="tab hidden">
+
+    <form action="/stream" method="post">
+      <h2 class="text-xl font-semibold mb-2">Add Stream</h2>
+      <div class="mb-4">
+        <label for="course-name" class="block">Stream Name:</label>
+        <input name="streamname" type="text" id="course-name" class="border border-gray-400 px-4 py-2 rounded w-64">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+
+    <table class="min-w-full divide-y divide-gray-200 mt-12">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Stream Name</th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        {{#each stream}}
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.streamname}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <a href="/stream/delete/{{this._id}}" class="text-red-500 hover:text-red-700">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+        <!-- Add more table rows as needed -->
+      </tbody>
+    </table>
+
+
+
+  </div>
+
+
   <!-- Users Form -->
   <div id="users-form" class="tab hidden">
     <table class="min-w-full divide-y divide-gray-200 mt-12">

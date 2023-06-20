@@ -14,12 +14,13 @@ router.get('/', async function (req, res, next) {
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
     let community = await db.get().collection('community').find().toArray();
+    let stream = await db.get().collection('stream').find().toArray();
     let users = await db.get().collection('users').find().toArray();
     let user = req.session.user;
     console.log(user);
     subject = subject.reverse();
     console.log(video);
-    res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community, users })
+    res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community, users, stream })
     // let user = null;
     // if (req.session) {
     //     user = req.session.user
@@ -41,6 +42,23 @@ router.get('/addvideo', async function (req, res, next) {
     let video = await db.get().collection('video').find().toArray();
     let doc = await db.get().collection('doc').find().toArray();
     res.render('addvideo.hbs', { university, course, semester, category, subject, module, video, doc })
+});
+
+router.get('/course/edit/:id', async function (req, res, next) {
+    let id = req.params.id
+    let course = await db.get().collection('course').findOne({ _id: ObjectId(id) });
+    let stream = await db.get().collection('stream').find().toArray();
+    console.log(course);
+    res.render('forms/editcourse.hbs', { course, stream })
+});
+
+router.post('/course/edit/:id', async function (req, res) {
+    let id = req.params.id
+    let newdata = req.body
+    let query = { _id: ObjectId(id) }
+    var newvalues = { $set: newdata };
+    await db.get().collection('course').updateOne(query, newvalues)
+    res.redirect(`/course/edit/${id}`)
 });
 
 router.get('/contribute', async function (req, res, next) {
@@ -130,6 +148,25 @@ router.get('/alldocs', async function (req, res, next) {
     let doc = await db.get().collection('doc').find().toArray();
     doc = doc.reverse();
     res.render('alldocs.hbs', { doc })
+});
+
+
+router.post('/stream', async function (req, res) {
+    let data = req.body;
+    const streamName = req.body.streamname;
+    const formattedStreamName = streamName.toLowerCase().replace(/\s/g, '-');
+    req.body.fstreamname = formattedStreamName;
+    // console.log(data);
+    await db.get().collection('stream').insertOne(data).then((response) => {
+        // console.log(response);
+    });
+    res.redirect('/');
+});
+
+router.get('/stream/delete/:id', async function (req, res) {
+    let id = req.params.id;
+    await db.get().collection('stream').deleteOne({ _id: ObjectId(id) });
+    res.redirect('/');
 });
 
 
