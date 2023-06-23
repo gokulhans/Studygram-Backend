@@ -1,66 +1,59 @@
 <script>
+    document.addEventListener("DOMContentLoaded", getSubjectlist);
+
     async function getSubjectlist() {
         console.log("get subject list");
-        const universitySelect = document.getElementById('university-select');
-        const courseSelect = document.getElementById('course-select');
-        const semesterSelect = document.getElementById('semester-select');
+
         const subjectSelect = document.getElementById('subject-select');
-        let selectedUniversity = universitySelect.value;
-        let selectedCourse = courseSelect.value;
-        let selectedSemester = semesterSelect.value;
-        const response = await fetch(`/subjectlist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}`);
-        const subjects = await response.json();
         subjectSelect.innerHTML = '';
+
         const nullOption = document.createElement('option');
         nullOption.value = 'null';
         nullOption.textContent = 'Select Subject';
-        subjectSelect.appendChild(nullOption);
-        subjects.forEach((subject) => {
-            const option = document.createElement('option');
-            option.value = subject.fsubjectname;
-            option.textContent = subject.subjectname;
-            subjectSelect.appendChild(option);
-        });
-    }
 
-    async function getModulelist() {
-        console.log("get module list");
-        const universitySelect = document.getElementById('university-select');
-        const courseSelect = document.getElementById('course-select');
-        const semesterSelect = document.getElementById('semester-select');
-        const subjectSelect = document.getElementById('subject-select');
-        const moduleSelect = document.getElementById('module-select');
-        let selectedUniversity = universitySelect.value;
-        let selectedCourse = courseSelect.value;
-        let selectedSemester = semesterSelect.value;
-        let selectedSubject = subjectSelect.value;
-        const response = await fetch(`/modulelist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}&subject=${selectedSubject}`);
-        const modules = await response.json();
-        moduleSelect.innerHTML = '';
-        const nullOption = document.createElement('option');
-        nullOption.value = 'null';
-        nullOption.textContent = 'Select Module';
-        moduleSelect.appendChild(nullOption);
-        const allOption = document.createElement('option');
-        allOption.value = 'all-module';
-        allOption.textContent = 'All Module';
-        moduleSelect.appendChild(allOption);
-        modules.forEach((module) => {
-            const option = document.createElement('option');
-            option.value = module.fmodulename;
-            option.textContent = module.modulename;
-            moduleSelect.appendChild(option);
-        });
+        const CommonCourseEnglish = document.createElement('option');
+        CommonCourseEnglish.value = 'common-course-english';
+        CommonCourseEnglish.textContent = 'Common Course English';
+
+        const ComplementeryCourse = document.createElement('option');
+        ComplementeryCourse.value = 'complementery-course';
+        ComplementeryCourse.textContent = 'Complementery Course';
+
+        const CoreCourse = document.createElement('option');
+        CoreCourse.value = 'core-course';
+        CoreCourse.textContent = 'Core Course';
+
+        const CommonCourseOther = document.createElement('option');
+        CommonCourseOther.value = 'common-course-other';
+        CommonCourseOther.textContent = 'Common Course Other';
+
+        const OpenCourse = document.createElement('option');
+        OpenCourse.value = 'open-course';
+        OpenCourse.textContent = 'Open Course';
+
+
+        subjectSelect.appendChild(nullOption);
+        subjectSelect.appendChild(CommonCourseEnglish);
+        subjectSelect.appendChild(CommonCourseOther);
+        subjectSelect.appendChild(CoreCourse);
+        subjectSelect.appendChild(ComplementeryCourse);
+        subjectSelect.appendChild(OpenCourse);
+
+
+        // subjects.forEach((subject) => {
+        // const option = document.createElement('option');
+        // option.value = subject.fsubjectname;
+        //  option.textContent = subject.subjectname;
+        //    subjectSelect.appendChild(option);
+        // });
     }
 </script>
+<div id="doc-form" class="md:px-48 pt-8">
+    <form action="/addvideo" method="post" class="flex flex-col items-center">
+        {{!-- <center class="text-xl font-semibold mb-3">Add Document</center> --}}
 
-
-<div id="video-form" class="md:px-48 pt-8">
-    <form action="/video" method="post" class="grid grid-cols-3 gap-4">
-        <h2 class="text-xl font-semibold mb-2 block md:col-span-3">Add Video</h2>
-
-        <div class="mb-4 block md:col-span-1">
-            <label for="university-select" class="block">University:</label>
+        <div class="mb-4 flex">
+            <label for="university-select" class="block mr-3 font-bold">University</label>
             <select name="universityname" id="university-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
                 {{!-- <option value="null">Select University</option> --}}
@@ -70,8 +63,8 @@
                 {{/each}}
             </select>
         </div>
-        <div class="mb-4 block md:col-span-1">
-            <label for="course-select" class="block">Course:</label>
+        <div class="mb-4 flex">
+            <label for="course-select" class="block mr-3 font-bold">Course:</label>
             <select name="coursename" id="course-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
                 <option value="null">Select Course</option>
@@ -81,8 +74,9 @@
                 {{/each}}
             </select>
         </div>
-        <div class="mb-4 block md:col-span-1">
-            <label for="semester-select" class="block">Semester:</label>
+
+        <div class="mb-4 flex">
+            <label for="semester-select" class="block mr-3 font-bold">Semester:</label>
             <select name="semestername" id="semester-select" onchange="getSubjectlist()"
                 class="border border-gray-400 px-4 py-2 rounded w-64">
                 <option value="null">Select Semester</option>
@@ -92,54 +86,82 @@
             </select>
         </div>
 
-        <div class="mb-4 block md:col-span-1">
-            <label for="subject-select" class="block">Subject:</label>
-            <select name="subjectname" id="subject-select" onchange="getModulelist()"
-                class="border border-gray-400 px-4 py-2 rounded w-64">
-                <option value="null">Select Subject</option>
+        <div class="mb-4 flex">
+            <label for="subject-select" class="block mr-3 font-bold">Subject:</label>
+            <div class="flex flex-col">
 
-                {{!-- {{#each subject}}
-                <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
-                {{/each}} --}}
-            </select>
+                <select name="subjectname" id="subject-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+                    <option value="null">Select Subject</option>
+                    {{#each subject}}
+                    <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
+                    {{/each}}
+                </select>
+                {{!-- <input type="text" name="newsubject" id="newsubject-name"
+                    class="m-2 border border-gray-400 px-4 py-2 rounded w-64" placeholder="New Subject"> --}}
+            </div>
         </div>
 
-        <div class="mb-4 block md:col-span-1">
-            <label for="module-select" class="block">Module:</label>
+        {{!-- <div class="mb-4 flex">
+            <label for="module-select" class="block mr-3 font-bold">Module:</label>
             <select name="modulename" id="module-select" class="border border-gray-400 px-4 py-2 rounded w-64">
-                <option value="null">Select Module</option>
-
-                {{!-- {{#each module}}
+                <option value="all-module">Select Module</option>
+                {{#each module}}
                 <option value="{{this.fmodulename}}">{{this.modulename}}</option>
-                {{/each}} --}}
+                {{/each}}
             </select>
+        </div> --}}
+        <input type="text" name="modulename" id="module-select" value="all-module" hidden>
+        <input type="text" name="categoryname" id="category-select" value="videos" hidden>
+
+        {{!-- <div class="mb-4 flex col-span-1">
+            <label for="category-select" class="block mr-3 font-bold">Category:</label>
+            <select name="categoryname" id="category-select" class="border border-gray-400 px-4 py-2 rounded w-64">
+                <option value="null">Select Category</option>
+                {{#each category}}
+                <option value="{{this.fcategoryname}}">{{this.categoryname}}</option>
+                {{/each}}
+            </select>
+        </div> --}}
+
+
+        <div class="mb-4 flex ">
+            <div class="">
+                <div class="mb-4 flex">
+                    <label for="document-title" class="block mr-3 font-bold">Title:</label>
+                    <input type="text" name="videotitle" id="video-name"
+                        class="border border-gray-400 px-4 py-2 rounded w-64">
+                </div>
+                <div class="mb-4 flex">
+                    <label for="document-title" class="block mr-3 font-bold">Link:</label>
+                    <input type="text" name="videolink" id="video-link"
+                        class="border border-gray-400 px-4 py-2 rounded w-64">
+                </div>
+            </div>
+        </div>
+        <div class="flex">
+
+            <div class="">
+                <button type="button" id="submit-button"
+                    class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+            </div>
         </div>
 
-        <div class="mb-4 block md:col-span-2">
-            <label for="video-name" class="block">Video Name:</label>
-            <input type="text" name="videoname" id="video-name"
-                class="block border border-gray-400 px-4 py-2 rounded w-full">
+        <div class="m-5 w-16 h-16">
+
         </div>
 
-        <div class="mb-4 block md:col-span-1">
-            <label for="video-link" class="block">Video Link:</label>
-            <input type="text" name="videolink" id="video-link"
-                class="block border border-gray-400 px-4 py-2 rounded w-full">
-        </div>
-
-        <div class="block md:col-span-3">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
-        </div>
     </form>
 
-    <table class="min-w-full divide-y divide-gray-200 mt-12">
+    <table class="min-w-full divide-y divide-gray-200 mt-12 ">
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     No
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Video</th>
+                    Doc</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     University</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -160,6 +182,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">{{@index}}</td>
                 <td class="px-6 py-4 whitespace-nowrap"><a href="{{this.videolink}}" target="_blank"
                         class="text-blue-500 underline">{{this.videoname}}</a></td>
+                <td class="px-6 py-4 whitespace-nowrap">{{this.categoryname}}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{this.universityname}}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{this.coursename}}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{this.semestername}}</td>
@@ -174,3 +197,35 @@
         </tbody>
     </table>
 </div>
+
+
+<script>
+    $("button").click(async function () {
+        console.log(' called'); 0
+        let universityname = document.getElementById('university-select').value;
+        let coursename = document.getElementById('course-select').value;
+        let semestername = document.getElementById('semester-select').value;
+        let subjectname = document.getElementById('subject-select').value;
+        let modulename = document.getElementById('module-select').value;
+        let categoryname = document.getElementById('category-select').value;
+        let videoname = document.getElementById('video-name').value;
+        let videolink = document.getElementById('video-link').value;
+
+        console.log(universityname, coursename, categoryname, modulename, subjectname, videoname, videolink)
+
+
+        $.post("/addvideo",
+            {
+                universityname: universityname,
+                coursename: coursename,
+                semestername: semestername,
+                subjectname: subjectname,
+                modulename: modulename,
+                categoryname: categoryname,
+                videoname: videoname,
+                videolink: videolink
+            },);
+        alert('added');
+    }
+    );
+</script>

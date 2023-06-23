@@ -40,8 +40,7 @@ router.get('/addvideo', async function (req, res, next) {
     let module = await db.get().collection('module').find().toArray();
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
-    let doc = await db.get().collection('doc').find().toArray();
-    res.render('addvideo.hbs', { university, course, semester, category, subject, module, video, doc })
+    res.render('addvideo.hbs', { university, course, semester, category, subject, module, video })
 });
 
 router.get('/course/edit/:id', async function (req, res, next) {
@@ -373,16 +372,13 @@ router.get('/category/delete/:id', async function (req, res) {
 });
 
 
-router.post('/video', async function (req, res) {
+router.post('/addvideo', async function (req, res) {
     let data = req.body;
     const videoName = req.body.videoname;
     const formattedVideoName = videoName.toLowerCase().replace(/\s/g, '-');
     req.body.fvideoname = formattedVideoName;
-
-    // console.log(data);
     await db.get().collection('video').insertOne(data).then((response) => {
-
-        // console.log(response);
+        console.log(response)
     });
     res.redirect('/addvideo');
 });
@@ -390,7 +386,7 @@ router.post('/video', async function (req, res) {
 router.get('/video/delete/:id', async function (req, res) {
     let id = req.params.id;
     await db.get().collection('video').deleteOne({ _id: ObjectId(id) });
-    res.redirect('/');
+    res.redirect('/addvideo');
 });
 
 
