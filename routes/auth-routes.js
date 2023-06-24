@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authsController = require("../controllers/auths-controller");
+const proController = require("../controllers/pro-controller");
 const adminControllers = require("../controllers/admins-controller");
 // const {login,register } = require("../controllers/auth.js");
 
@@ -26,7 +27,9 @@ router.post("/signup", authsController.postSignup);
 router.get('/signin', authsController.getSignin);
 router.post("/signin", authsController.postSignin);
 router.get("/logout", authsController.logOut);
-
+// pro
+router.post("/pro/login", proController.login);
+router.post("/pro/signup", proController.register);
 // admin 
 router.get('/admin/dashboard/', requiredadmin, adminControllers.getDashboard);
 router.get('/admin/', hide, adminControllers.getSignup);

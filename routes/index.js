@@ -582,13 +582,13 @@ router.get('/api/video/:university/:course/:semester/:subject/:module', async (r
     const selectedCourse = req.params.course;
     const selectedSemester = req.params.semester;
     const selectedSubject = req.params.subject;
-    const selectedModule = req.params.module;
+    // const selectedModule = req.params.module;
     const videos = await db.get().collection('video').find({
         universityname: selectedUniversity,
         coursename: selectedCourse,
         semestername: selectedSemester,
         subjectname: selectedSubject,
-        modulename: selectedModule,
+        // modulename: selectedModule,
     }).toArray();
     res.json(videos);
 });
