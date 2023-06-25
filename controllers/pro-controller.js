@@ -83,7 +83,7 @@ const login = async (req, res) => {
     let userid = user._id.toString();
     // let userlocation = user._id;
     // //console.log(userid);
-    res.status(201).json([{ "id": userid }]);
+    res.status(201).json([{ "id": userid,"name":user.name }]);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: true });
