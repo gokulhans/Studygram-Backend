@@ -24,11 +24,9 @@ const register = async (req, res) => {
       response.signupstatus = true
       response.user = req.body
       console.log(response);
-
       let userid = response.insertedId.toString();
       // //console.log(userid);
       res.status(201).json([{ "id": userid }]);
-
     })
 
     // const newUser = new User({

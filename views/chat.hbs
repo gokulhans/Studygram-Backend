@@ -1,7 +1,7 @@
 <div class="">
     <div class="container mx-auto p-4">
         <div class="bg-white">
-            <div class="flex flex-col pt-12">
+            <div class="flex flex-col pt-12 ">
                 <div class="flex items-center bg-white fixed top-0 py-3">
                     <img src="{{community.image}}" alt="Chat Image" class="h-8 rounded-full px-2">
                     <h1 class="text-md pl-3 font-bold">{{community.communityname}}</h1>
@@ -18,21 +18,80 @@
                     <!-- Add more chat messages as needed -->
                 </div>
                 {{/each}}
+                <div id="chatContainer" class="flex-grow px-2 overflow-y-auto">
 
-                <form method="post" action="/chat/{{community._id}}" class="bg-gray-200  fixed bottom-0 left-0">
+                </div>
+
+                <form class="bg-gray-200  fixed bottom-0 left-0">
                     <div class="flex items-center">
                         <div class="">
-                            <input type="text" placeholder="Type your message..." name="message"
+                            <input type="text" id="msg" placeholder="Type your message..." name="message"
                                 class="flex-grow px-4 h-16 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
                         </div>
+                        <div class="hidden">
+                            <input type="text" id="user-name" name="user-name" value="{{user}}">
+                        </div>
+                        <div class="hidden">
+                            <input type="text" id="community-id" name="community-id" value="{{community._id}}">
+                        </div>
                         <div>
-                            <button type="submit"
+                            <button type="button" id="button"
                                 class="h-16 bg-blue-500 hover:bg-blue-600 text-white py-2 px-5 w-100 rounded-r-lg font-bold">></button>
                         </div>
                     </div>
                 </form>
 
+                <div id="bottomdiv" class="w-full h-16">
+
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    $("button").click(async function () {
+        console.log('called');
+        let communityid = document.getElementById('community-id').value;
+        let msg = document.getElementById('msg').value;
+        let username = document.getElementById('user-name').value;
+
+        try {
+            var response = await $.post(`/chat/${communityid}/${username}`, { message: msg });
+            console.log('Request sent successfully');
+            console.log('Response:', response);
+
+            // Perform any necessary UI updates with the response data
+
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle the error appropriately
+        }
+
+
+
+        var chatContainer = document.getElementById('chatContainer');
+        var chatMessage = document.createElement('div');
+        chatMessage.classList.add('flex', 'justify-start', 'mb-2');
+        chatMessage.innerHTML = `
+        <div class="bg-gray-100 rounded-lg p-2">
+          <p class="text-sm font-bold">${username}</p>
+          <p>${msg}</p>
+        </div>
+      `;
+        chatContainer.appendChild(chatMessage);
+        document.getElementById('msg').value = '';
+
+        var targetDiv = document.getElementById('bottomdiv');
+        targetDiv.scrollIntoView({ behavior: 'smooth' });
+
+    }
+    );
+
+    window.addEventListener('load', function () {
+        var targetDiv = document.getElementById('bottomdiv');
+        targetDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>

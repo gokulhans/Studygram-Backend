@@ -193,41 +193,40 @@ router.get('/users/delete/:id', async function (req, res) {
     res.redirect('/');
 });
 
-router.get('/community', async function (req, res) {
-    let user = req.session.user;
-    console.log(user);
-    if (user) {
-        let community = await db.get().collection('community').find().toArray();
-        res.render('community.hbs', { community })
-    } else {
-        res.render('communitylogin.hbs')
-    }
-});
 
-router.get('/community/:id', async function (req, res) {
+router.get('/community/single/:id/:user', async function (req, res) {
     let id = req.params.id
+    let user = req.params.user
     let community = await db.get().collection('community').findOne({ _id: ObjectId(id) });
     console.log(community._id);
     let chat2 = await db.get().collection('chat').find({}).toArray()
     let chat = await db.get().collection('chat').find({ community: id }).toArray()
     console.log(community);
     console.log(chat);
-    let user = req.session.user;
     res.render('chat.hbs', { community, user, chat })
 });
 
-router.post('/chat/:id', async function (req, res) {
-    let user = req.session.user
+router.get('/community/:user', async function (req, res) {
+    let user = req.params.user;
+    console.log(user);
+    let community = await db.get().collection('community').find().toArray();
+    res.render('community.hbs', { community, user })
+});
+
+router.post('/chat/:id/:user', async function (req, res) {
+    let user = req.params.user
     let data = req.body
     let id = req.params.id
     req.body.community = id;
-    req.body.user = user.user.name;
-    // console.log(data);
-    await db.get().collection('chat').insertOne(data).then((response) => {
-        // console.log(response);
-    })
-    const redirectTo = `/community/${id}`;
-    res.redirect(redirectTo)
+    req.body.user = user;
+    try {
+        await db.get().collection('chat').insertOne(data);
+        console.log('Chat data inserted successfully');
+        res.sendStatus(200); // Send a success response to the client
+    } catch (error) {
+        console.error('Error inserting chat data:', error);
+        res.sendStatus(500); // Send an error response to the client
+    }
 });
 
 router.get('/university/delete/:id', async function (req, res) {
