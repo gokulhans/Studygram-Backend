@@ -523,8 +523,8 @@ router.get('/noti/delete/:id', async function (req, res) {
 
 router.get('/api/noti/:university', async (req, res) => {
     let university = req.params.university;
-    // let notis = await db.get().collection('notis').find().toArray();
-    let notis = await db.get().collection('notis').find({ universityname: university }).toArray();
+    let notis = await db.get().collection('notis').find().toArray();
+    // let notis = await db.get().collection('notis').find({ universityname: university }).toArray();
     res.json(notis);
 });
 
