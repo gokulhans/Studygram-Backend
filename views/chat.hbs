@@ -11,13 +11,15 @@
                 <div class="flex-grow px-2 overflow-y-auto">
                     <div class="flex justify-start mb-2">
                         <div class="bg-gray-100 rounded-lg p-2">
-                            <p class="text-sm font-bold"> {{this.user}}</p>
-                            <p>{{this.message}}</p>
+                            <p class="text-sm font-bold">{{this.user}}</p>
+                            <p id="message-{{@index}}">{{this.message}}</p>
                         </div>
                     </div>
                     <!-- Add more chat messages as needed -->
                 </div>
                 {{/each}}
+
+
                 <div id="chatContainer" class="flex-grow px-2 overflow-y-auto">
 
                 </div>
@@ -94,4 +96,18 @@
         var targetDiv = document.getElementById('bottomdiv');
         targetDiv.scrollIntoView({ behavior: 'smooth' });
     });
+</script>
+
+<script>
+    function convertUrlsToLinks() {
+        const messages = document.querySelectorAll('[id^="message-"]');
+        messages.forEach(message => {
+            const messageText = message.textContent;
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const replacedText = messageText.replace(urlRegex, '<a href="$1" style="color: blue; target="_blank">$1</a>');
+            message.innerHTML = replacedText;
+        });
+    }
+
+    convertUrlsToLinks();
 </script>

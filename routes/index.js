@@ -441,26 +441,23 @@ router.get('/modulelist', async (req, res) => {
 
 
 
-router.get('/noti', async function (req, res) {
-    let data = await db.get().collection('notis').find({}).toArray();
-    res.render('notis.hbs', { data })
-});
 
 router.get('/addnoti', async function (req, res) {
     let university = await db.get().collection('university').find().toArray();
-    res.render('addnoti.hbs', { university })
+    let data = await db.get().collection('notis').find({}).toArray();
+    res.render('addnoti.hbs', { university, data })
 });
 
 router.post('/addnoti', async function (req, res) {
     let data = req.body;
     await db.get().collection('notis').insertOne(data)
-    res.redirect('/noti');
+    res.redirect('/addnoti');
 });
 
 router.get('/noti/delete/:id', async function (req, res) {
     let id = req.params.id;
     await db.get().collection('notis').deleteOne({ _id: ObjectId(id) });
-    res.redirect('/noti');
+    res.redirect('/addnoti');
 });
 
 // const getAllProducts = async function(req, res) {
