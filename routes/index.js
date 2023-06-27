@@ -206,10 +206,12 @@ router.get('/community/single/:id/:user', async function (req, res) {
     res.render('chat.hbs', { community, user, chat })
 });
 
-router.get('/community/:user', async function (req, res) {
+router.get('/community/:user/:university', async function (req, res) {
     let user = req.params.user;
+    let university = req.params.university;
     console.log(user);
     let community = await db.get().collection('community').find().toArray();
+    // let community = await db.get().collection('community').find({ university: university }).toArray();
     res.render('community.hbs', { community, user })
 });
 
@@ -519,8 +521,10 @@ router.get('/noti/delete/:id', async function (req, res) {
 
 // Noti Endpoint
 
-router.get('/api/noti', async (req, res) => {
-    let notis = await db.get().collection('notis').find().toArray();
+router.get('/api/noti/:university', async (req, res) => {
+    let university = req.params.university;
+    // let notis = await db.get().collection('notis').find().toArray();
+    let notis = await db.get().collection('notis').find({ universityname: university }).toArray();
     res.json(notis);
 });
 
