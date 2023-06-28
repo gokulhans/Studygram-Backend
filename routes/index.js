@@ -536,6 +536,18 @@ router.get('/api/university', async (req, res) => {
 });
 
 // Course Endpoint
+router.get('/api/course/:university', async (req, res) => {
+    let university = req.params.university;
+    let courses;
+    if (university == "ktu-") {
+        courses = await db.get().collection('course').find({ stream: { $in: ["ug-engineering", "pg-engineering"] } }).toArray();
+    } else {
+        courses = await db.get().collection('course').find({ stream: { $in: ["ug-degree", "pg-degree"] } }).toArray();
+    }
+    res.json(courses);
+});
+
+// Course Endpoint
 router.get('/api/course', async (req, res) => {
     let courses = await db.get().collection('course').find().toArray();
     res.json(courses);
@@ -552,11 +564,29 @@ router.get('/api/subject/:university/:course/:semester', async (req, res) => {
     const selectedUniversity = req.params.university;
     const selectedCourse = req.params.course;
     const selectedSemester = req.params.semester;
-    const subjects = await db.get().collection('subject').find({
+    let subjects;
+    subjects = await db.get().collection('subject').find({
         universityname: selectedUniversity,
         coursename: selectedCourse,
         semestername: selectedSemester,
     }).toArray();
+    if (subjects.length < 3) {
+        if (selectedSemester == "semester-5") {
+            let newsubjects = await db.get().collection('subject').find({
+                universityname: "admin",
+                coursename: "admin",
+                semestername: { $in: ["semester-1", "semester-5"] }
+            }).toArray();
+            subjects = subjects.concat(newsubjects);
+        } else {
+            let newsubjects = await db.get().collection('subject').find({
+                universityname: "admin",
+                coursename: "admin",
+                semestername: "semester-1",
+            }).toArray();
+            subjects = subjects.concat(newsubjects);
+        }
+    }
     // let subjects = await db.get().collection('subject').find().toArray();
     res.json(subjects);
 });
