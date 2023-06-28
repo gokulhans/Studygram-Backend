@@ -210,8 +210,8 @@ router.get('/community/:user/:university', async function (req, res) {
     let user = req.params.user;
     let university = req.params.university;
     console.log(user);
-    // let community = await db.get().collection('community').find().toArray();
-    let community = await db.get().collection('community').find({ universityname: university }).toArray();
+    let community = await db.get().collection('community').find().toArray();
+    // let community = await db.get().collection('community').find({ universityname: university }).toArray();
     res.render('community.hbs', { community, user })
 });
 
