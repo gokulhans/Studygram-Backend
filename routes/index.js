@@ -17,9 +17,9 @@ router.get('/', async function (req, res, next) {
     let stream = await db.get().collection('stream').find().toArray();
     let users = await db.get().collection('users').find().toArray();
     let user = req.session.user;
-    console.log(user);
+    // console.log(user);
     subject = subject.reverse();
-    console.log(video);
+    // console.log(video);
     res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community, users, stream })
     // let user = null;
     // if (req.session) {
@@ -47,7 +47,7 @@ router.get('/course/edit/:id', async function (req, res, next) {
     let id = req.params.id
     let course = await db.get().collection('course').findOne({ _id: ObjectId(id) });
     let stream = await db.get().collection('stream').find().toArray();
-    console.log(course);
+    // console.log(course);
     res.render('forms/editcourse.hbs', { course, stream })
 });
 
@@ -81,10 +81,10 @@ router.post('/contribute/:id', async function (req, res) {
     req.body.fdocname = formattedDocTitle;
     req.body.userid = userid;
     req.body.verify = false;
-    console.log(data);
+    // console.log(data);
 
     await db.get().collection('cdoc').insertOne(data).then((response) => {
-        console.log(response);
+        // console.log(response);
     });
 
     res.redirect('/contribute');
@@ -106,7 +106,7 @@ router.get('/adddoc', async function (req, res, next) {
 
 router.post('/doc', async function (req, res) {
     let data = req.body;
-    console.log(data);
+    // console.log(data);
     if (data.subjectname == 'null') {
         // console.log("null");
         req.body.subjectname = req.body.newsubject;
@@ -125,7 +125,7 @@ router.post('/doc', async function (req, res) {
             semestername: data.semestername,
             subjectname: data.newsubject
         });
-        console.log(result);
+        // console.log(result);
         if (!result) {
             await db.get().collection('subject').insertOne(subjectdata)
         }
@@ -198,20 +198,21 @@ router.get('/community/single/:id/:user', async function (req, res) {
     let id = req.params.id
     let user = req.params.user
     let community = await db.get().collection('community').findOne({ _id: ObjectId(id) });
-    console.log(community._id);
+    // console.log(community._id);
     let chat2 = await db.get().collection('chat').find({}).toArray()
     let chat = await db.get().collection('chat').find({ community: id }).toArray()
-    console.log(community);
-    console.log(chat);
+    // console.log(community);
+    // console.log(chat);
     res.render('chat.hbs', { community, user, chat })
 });
 
 router.get('/community/:user/:university', async function (req, res) {
     let user = req.params.user;
     let university = req.params.university;
-    console.log(user);
-    let community = await db.get().collection('community').find().toArray();
-    // let community = await db.get().collection('community').find({ universityname: university }).toArray();
+    // console.log(user);
+    let community2 = await db.get().collection('community').find().toArray();
+    // console.log(community2);
+    let community = await db.get().collection('community').find({ universityname: university }).toArray();
     res.render('community.hbs', { community, user })
 });
 
@@ -223,7 +224,7 @@ router.post('/chat/:id/:user', async function (req, res) {
     req.body.user = user;
     try {
         await db.get().collection('chat').insertOne(data);
-        console.log('Chat data inserted successfully');
+        // console.log('Chat data inserted successfully');
         res.sendStatus(200); // Send a success response to the client
     } catch (error) {
         console.error('Error inserting chat data:', error);
@@ -379,7 +380,7 @@ router.post('/addvideo', async function (req, res) {
     const formattedVideoName = videoName.toLowerCase().replace(/\s/g, '-');
     req.body.fvideoname = formattedVideoName;
     await db.get().collection('video').insertOne(data).then((response) => {
-        console.log(response)
+        // console.log(response)
     });
     res.redirect('/addvideo');
 });
@@ -608,7 +609,7 @@ router.get('/api/doc/:university/:course/:semester/:subject/:module/:category', 
         subjectname: selectedSubject,
         categoryname: selectedCategory
     }).toArray();
-    console.log(docs);
+    // console.log(docs);
     res.json(docs);
 });
 
