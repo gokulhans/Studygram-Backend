@@ -570,23 +570,23 @@ router.get('/api/subject/:university/:course/:semester', async (req, res) => {
         coursename: selectedCourse,
         semestername: selectedSemester,
     }).toArray();
-    if (subjects.length < 3) {
-        if (selectedSemester == "semester-5") {
-            let newsubjects = await db.get().collection('subject').find({
-                universityname: "admin",
-                coursename: "admin",
-                semestername: { $in: ["semester-1", "semester-5"] }
-            }).toArray();
-            subjects = subjects.concat(newsubjects);
-        } else {
-            let newsubjects = await db.get().collection('subject').find({
-                universityname: "admin",
-                coursename: "admin",
-                semestername: "semester-1",
-            }).toArray();
-            subjects = subjects.concat(newsubjects);
-        }
+    // if (subjects.length < 3) {
+    if (selectedSemester == "semester-5") {
+        let newsubjects = await db.get().collection('subject').find({
+            universityname: "admin",
+            coursename: "admin",
+            semestername: { $in: ["semester-1", "semester-5"] }
+        }).toArray();
+        subjects = subjects.concat(newsubjects);
+    } else {
+        let newsubjects = await db.get().collection('subject').find({
+            universityname: "admin",
+            coursename: "admin",
+            semestername: "semester-1",
+        }).toArray();
+        subjects = subjects.concat(newsubjects);
     }
+    // }
     // let subjects = await db.get().collection('subject').find().toArray();
     res.json(subjects);
 });
