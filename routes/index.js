@@ -538,13 +538,13 @@ router.get('/api/university', async (req, res) => {
 // Course Endpoint
 router.get('/api/course/:university', async (req, res) => {
     let university = req.params.university;
-    // let courses;
-    // if (university == "ktu-") {
-    //     courses = await db.get().collection('course').find({ stream: { $in: ["ug-engineering", "pg-engineering"] } }).toArray();
-    // } else {
-    //     courses = await db.get().collection('course').find({ stream: { $in: ["ug-degree", "pg-degree"] } }).toArray();
-    // }
-    let courses = await db.get().collection('course').find().toArray();
+    let courses;
+    if (university == "ktu-") {
+        courses = await db.get().collection('course').find({ stream: { $in: ["ug-engineering", "pg-engineering"] } }).toArray();
+    } else {
+        courses = await db.get().collection('course').find({ stream: { $in: ["ug-degree", "pg-degree"] } }).toArray();
+    }
+    // let courses = await db.get().collection('course').find().toArray();
     res.json(courses);
 });
 
