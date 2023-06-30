@@ -536,6 +536,13 @@ router.get('/api/university', async (req, res) => {
 });
 
 // Course Endpoint
+router.get('/api/course', async (req, res) => {
+    let courses = await db.get().collection('course').find({ stream: { $in: ["ug-degree", "pg-degree"] } }).toArray();
+    res.json(courses);
+});
+
+
+// Course Endpoint
 router.get('/api/course/:university', async (req, res) => {
     let university = req.params.university;
     let courses;
@@ -548,11 +555,7 @@ router.get('/api/course/:university', async (req, res) => {
     res.json(courses);
 });
 
-// Course Endpoint
-router.get('/api/course', async (req, res) => {
-    let courses = await db.get().collection('course').find().toArray();
-    res.json(courses);
-});
+
 
 // Semester Endpoint
 router.get('/api/semester', async (req, res) => {
