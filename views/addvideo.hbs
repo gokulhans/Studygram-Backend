@@ -31,6 +31,10 @@
         OpenCourse.value = 'open-course';
         OpenCourse.textContent = 'Open Course';
 
+        const Lab = document.createElement('option');
+        Lab.value = 'lab';
+        Lab.textContent = 'Lab';
+
 
         subjectSelect.appendChild(nullOption);
         subjectSelect.appendChild(CommonCourseEnglish);
@@ -38,6 +42,7 @@
         subjectSelect.appendChild(CoreCourse);
         subjectSelect.appendChild(ComplementeryCourse);
         subjectSelect.appendChild(OpenCourse);
+        subjectSelect.appendChild(Lab);
 
 
         // subjects.forEach((subject) => {
