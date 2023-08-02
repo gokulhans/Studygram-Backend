@@ -9,6 +9,7 @@ router.get('/', async function (req, res, next) {
     let course = await db.get().collection('course').find().toArray();
     let semester = await db.get().collection('semester').find().toArray();
     let subject = await db.get().collection('subject').find().toArray();
+    let videosubject = await db.get().collection('videosubject').find().toArray();
     let module = await db.get().collection('module').find().toArray();
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
@@ -20,7 +21,7 @@ router.get('/', async function (req, res, next) {
     // console.log(user);
     subject = subject.reverse();
     // console.log(video);
-    res.render('index.hbs', { user, university, course, semester, category, subject, module, video, doc, community, users, stream })
+    res.render('index.hbs', { user, university, course, semester, category, subject, videosubject, module, video, doc, community, users, stream })
     // let user = null;
     // if (req.session) {
     //     user = req.session.user
@@ -36,7 +37,7 @@ router.get('/addvideo', async function (req, res, next) {
     let university = await db.get().collection('university').find().toArray();
     let course = await db.get().collection('course').find().toArray();
     let semester = await db.get().collection('semester').find().toArray();
-    let subject = await db.get().collection('subject').find().toArray();
+    let subject = await db.get().collection('videosubject').find().toArray();
     let module = await db.get().collection('module').find().toArray();
     let category = await db.get().collection('category').find().toArray();
     let video = await db.get().collection('video').find().toArray();
@@ -331,6 +332,24 @@ router.get('/subject/delete/:id', async function (req, res) {
     res.redirect('/');
 });
 
+router.post('/videosubject', async function (req, res) {
+    let data = req.body;
+    const subjectName = req.body.subjectname;
+    const formattedSubjectName = subjectName.toLowerCase().replace(/\s/g, '-');
+    req.body.fsubjectname = formattedSubjectName;
+    // console.log(data);
+    await db.get().collection('videosubject').insertOne(data).then((response) => {
+        // console.log(response);
+    });
+    res.redirect('/');
+});
+
+router.get('/videosubject/delete/:id', async function (req, res) {
+    let id = req.params.id;
+    await db.get().collection('videosubject').deleteOne({ _id: ObjectId(id) });
+    res.redirect('/');
+});
+
 
 router.post('/module', async function (req, res) {
     let data = req.body;
@@ -404,6 +423,30 @@ router.get('/subjectlist', async (req, res) => {
 
         // Query the database to retrieve the modules based on the selected university and semester
         const subjects = await db.get().collection('subject').find({
+            universityname: selectedUniversity,
+            coursename: selectedCourse,
+            semestername: selectedSemester,
+        }).toArray();
+
+        // console.log(subjects);
+        res.json(subjects);
+    } catch (error) {
+
+        // console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+router.get('/videosubjectlist', async (req, res) => {
+    try {
+        const selectedUniversity = req.query.university;
+        const selectedCourse = req.query.course;
+        const selectedSemester = req.query.semester;
+
+
+        // console.log(selectedUniversity, selectedCourse, selectedSemester);
+
+        // Query the database to retrieve the modules based on the selected university and semester
+        const subjects = await db.get().collection('videosubject').find({
             universityname: selectedUniversity,
             coursename: selectedCourse,
             semestername: selectedSemester,

@@ -1,57 +1,25 @@
 <script>
-    document.addEventListener("DOMContentLoaded", getSubjectlist);
-
-    async function getSubjectlist() {
-        console.log("get subject list");
-
+    async function getSubjectlist(){
+        const universitySelect = document.getElementById('university-select');
+        const courseSelect = document.getElementById('course-select');
+        const semesterSelect = document.getElementById('semester-select');
         const subjectSelect = document.getElementById('subject-select');
+        let selectedUniversity = universitySelect.value;
+        let selectedCourse = courseSelect.value;
+        let selectedSemester = semesterSelect.value;
+        const response = await
+        fetch(`/videosubjectlist?university=${selectedUniversity}&semester=${selectedSemester}&course=${selectedCourse}`);
+        var subjects = await response.json();
+        console.log(subjects);
         subjectSelect.innerHTML = '';
-
-        const nullOption = document.createElement('option');
-        nullOption.value = 'null';
-        nullOption.textContent = 'Select Subject';
-
-        const CommonCourseEnglish = document.createElement('option');
-        CommonCourseEnglish.value = 'common-course-english';
-        CommonCourseEnglish.textContent = 'Common Course English';
-
-        const ComplementeryCourse = document.createElement('option');
-        ComplementeryCourse.value = 'complementery-course';
-        ComplementeryCourse.textContent = 'Complementery Course';
-
-        const CoreCourse = document.createElement('option');
-        CoreCourse.value = 'core-course';
-        CoreCourse.textContent = 'Core Course';
-
-        const CommonCourseOther = document.createElement('option');
-        CommonCourseOther.value = 'common-course-other';
-        CommonCourseOther.textContent = 'Common Course Other';
-
-        const OpenCourse = document.createElement('option');
-        OpenCourse.value = 'open-course';
-        OpenCourse.textContent = 'Open Course';
-
-        const Lab = document.createElement('option');
-        Lab.value = 'lab';
-        Lab.textContent = 'Lab';
-
-
-        subjectSelect.appendChild(nullOption);
-        subjectSelect.appendChild(CommonCourseEnglish);
-        subjectSelect.appendChild(CommonCourseOther);
-        subjectSelect.appendChild(CoreCourse);
-        subjectSelect.appendChild(ComplementeryCourse);
-        subjectSelect.appendChild(OpenCourse);
-        subjectSelect.appendChild(Lab);
-
-
-        // subjects.forEach((subject) => {
-        // const option = document.createElement('option');
-        // option.value = subject.fsubjectname;
-        //  option.textContent = subject.subjectname;
-        //    subjectSelect.appendChild(option);
-        // });
+        subjects.forEach((subject) => {
+            const option = document.createElement('option');
+            option.value = subject.fsubjectname;
+            option.textContent = subject.subjectname;
+            subjectSelect.appendChild(option);
+        });
     }
+
 </script>
 <div id="doc-form" class="md:px-48 pt-8">
     <form action="/addvideo" method="post" class="flex flex-col items-center">
@@ -97,36 +65,16 @@
 
                 <select name="subjectname" id="subject-select" class="border border-gray-400 px-4 py-2 rounded w-64">
                     <option value="null">Select Subject</option>
-                    {{#each subject}}
+                    {{!-- {{#each subject}}
                     <option value="{{this.fsubjectname}}">{{this.subjectname}}</option>
-                    {{/each}}
+                    {{/each}} --}}
                 </select>
-                {{!-- <input type="text" name="newsubject" id="newsubject-name"
-                    class="m-2 border border-gray-400 px-4 py-2 rounded w-64" placeholder="New Subject"> --}}
+
             </div>
         </div>
 
-        {{!-- <div class="mb-4 flex">
-            <label for="module-select" class="block mr-3 font-bold">Module:</label>
-            <select name="modulename" id="module-select" class="border border-gray-400 px-4 py-2 rounded w-64">
-                <option value="all-module">Select Module</option>
-                {{#each module}}
-                <option value="{{this.fmodulename}}">{{this.modulename}}</option>
-                {{/each}}
-            </select>
-        </div> --}}
         <input type="text" name="modulename" id="module-select" value="all-module" hidden>
         <input type="text" name="categoryname" id="category-select" value="videos" hidden>
-
-        {{!-- <div class="mb-4 flex col-span-1">
-            <label for="category-select" class="block mr-3 font-bold">Category:</label>
-            <select name="categoryname" id="category-select" class="border border-gray-400 px-4 py-2 rounded w-64">
-                <option value="null">Select Category</option>
-                {{#each category}}
-                <option value="{{this.fcategoryname}}">{{this.categoryname}}</option>
-                {{/each}}
-            </select>
-        </div> --}}
 
 
         <div class="mb-4 flex ">
