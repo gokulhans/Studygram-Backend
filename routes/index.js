@@ -598,7 +598,7 @@ router.get('/api/course/:university', async (req, res) => {
     res.json(courses);
 });
 
-
+//test comment
 
 // Semester Endpoint
 router.get('/api/semester', async (req, res) => {
