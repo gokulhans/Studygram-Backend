@@ -638,6 +638,20 @@ router.get('/api/subject/:university/:course/:semester', async (req, res) => {
     res.json(subjects);
 });
 
+//video subject end point
+router.get('/api/videosubject/:university/:course/:semester', async (req, res) => {
+    const selectedUniversity = req.params.university;
+    const selectedCourse = req.params.course;
+    const selectedSemester = req.params.semester;
+    let subjects;
+    subjects = await db.get().collection('videosubject').find({
+        universityname: selectedUniversity,
+        coursename: selectedCourse,
+        semestername: selectedSemester,
+    }).toArray();
+    res.json(subjects);
+});
+
 // Module Endpoint
 router.get('/api/module/:university/:course/:semester/:subject', async (req, res) => {
     // const selectedUniversity = req.params.university;
